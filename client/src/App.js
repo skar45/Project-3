@@ -1,36 +1,30 @@
 import React, { useState } from "react";
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
+import NavBar from "./components/NavBar"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CalendarMain from "./views/CalendarMain"
+import Notes from "./views/Notes"
+import Footer from './components/Footer';
 
-const localizer = momentLocalizer(moment);
 
-function App(){
-  
-  const [events, setEvents] = useState([{
-    start: moment().toDate(),
-    end: moment()
-      .add(1, "days")
-      .toDate(),
-    title: "Some title"
-  }])
-
+function App() {
   return (
-    <div className="App">
-      <h1>Good Morning, Dailey!</h1>
-      <div className="container">
-        <Calendar
-        localizer={localizer}
-        defaultDate={new Date()}
-        defaultView="month"
-        events={events}
-        style={{ height: "100vh" }}
-      />
+    <Router basename={process.env.PUBLIC_URL}>
+      <div>
+        <NavBar />
+          <div className="container">
+            <Switch>
+              <Route exact path='/CalendarMain'>
+                <CalendarMain />
+              </Route>
+              <Route path='/Notes'>
+                <Notes />
+              </Route>
+            </Switch>
+          </div>
+        <Footer />
       </div>
-      
-    </div>
+    </Router>
   );
-  
 }
 
 export default App;
