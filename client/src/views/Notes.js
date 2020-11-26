@@ -1,31 +1,50 @@
-import React from "react";
-import Card from "../components/Card"
+import React, { Component } from "react";
+import { connect } from "react-redux";
+//import noteReducer from ".. /reducers/noteReducer";
+class Note extends Component {
+  render() {
+    const notes = this.props.notes.map((note) => {
+      return (
+        <div className="note">
+          <h2 className="note_title">{note.title}</h2>
+          <p className="note_message">{note.message}</p>
+          <div className="control-buttons">
+            <button
+              className="edit"
+              onClick={
+                () =>
+                  this.props.dispatch({
+                    type: "EDIT_NOTE",
+                    id: note.id,
+                  })
+                //this.props.location.push("/editNotes");
+              }
+            >
+              Edit
+            </button>
 
-function Notes(props) {
-    return (
-      <div>
-          <div className="row">
-            <div className="col-sm-6">
-              <Card />
-            </div>
-            <div className="col-sm-6">
-              <Card /> 
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-6">
-              <Card /> 
-            </div>
-            <div className="col-sm-6">
-              <Card /> 
-            </div>
+            <button
+              className="delete"
+              onClick={() =>
+                this.props.dispatch({
+                  type: "DELETE_NOTE",
+                  id: note.id,
+                })
+              }
+            >
+              Delete
+            </button>
           </div>
         </div>
-      
-      
-    );
+      );
+    });
+    return <>{notes}</>;
   }
-  
-  export default Notes;
+}
 
-  
+const mapStateToProps = (state) => {
+  return {
+    notes: state,
+  };
+};
+export default connect(mapStateToProps)(Note);
