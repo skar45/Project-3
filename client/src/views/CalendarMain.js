@@ -3,7 +3,7 @@ import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import {INITIAL_EVENTS, createEventId} from '../components/event-utils'
+import { INITIAL_EVENTS, createEventId } from "../components/event-utils";
 
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
@@ -47,16 +47,17 @@ export default function CalendarMain() {
 
   return (
     <div className="App">
+      <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
       <div className="container">
         <h1>Good Morning, Dailey</h1>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
-            left: "prev, next, today",
+            left: "prev,next today",
             center: "title",
-            right: "dayGridPlugin, timeGridPlugin, interactionPlugin",
+            right: "dayGridMonth,timeGridWeek,timeGridWeek",
           }}
-          initalView='dayGridMonth'
+          initalView="dayGridMonth"
           editable={true}
           selectable={true}
           selectMirror={true}
@@ -68,6 +69,31 @@ export default function CalendarMain() {
           eventClick={handleEventClick}
           eventsSet={handleEvents}
         />
+      </div>
+    </div>
+  );
+}
+
+function RenderSidebar(props) {
+  return (
+    <div>
+      <div>
+        <h2>Instructions</h2>
+        <ul>
+          <li>Select dates and you will be prompted to create a new event</li>
+          <li>Drag, drop, and resize events</li>
+        </ul>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} />toggle weekends
+        </label>
+      </div>
+      <div>
+        <h2>All Events ({props.currentEvents.length})</h2>
+        <ul>
+          {props.currentEvents.map(renderSidebarEvent)}
+        </ul>
       </div>
     </div>
   );
