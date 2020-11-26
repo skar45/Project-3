@@ -6,7 +6,12 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import noteReducer from "./reducers/noteReducer";
 import reportWebVitals from "./reportWebVitals";
-const store = createStore(noteReducer);
+
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const store = createStore(noteReducer, composeEnhancers());
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

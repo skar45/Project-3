@@ -16,6 +16,7 @@ class EditNote extends Component {
     });
   };
   render() {
+    //map through redux state and find note with editing true. return that note
     return (
       <div key={this.props.note.id} className="note">
         <form className="form" onSubmit={this.handleUpdate}>
