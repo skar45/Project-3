@@ -3,7 +3,8 @@ import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "../components/event-utils";
+import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
+import API from '../utils/API'
 
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
@@ -45,6 +46,18 @@ export default function CalendarMain() {
     setCurrentEvents(events);
   }
 
+  async function addEvents(response){
+    let newEvent = {
+      id: response.event.id,
+      title: response.event.title,
+      start: response.event.start,
+      end: response.event.end,
+      allDay: response.event.allDay
+    }
+    let result = await API.addEvent(newEvent)
+    // console.log(result)
+  }
+
   return (
     <div className="App">
       <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
@@ -55,7 +68,7 @@ export default function CalendarMain() {
           headerToolbar={{
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridWeek",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
           initalView="dayGridMonth"
           editable={true}
@@ -68,6 +81,11 @@ export default function CalendarMain() {
           eventContent={renderEventContent} // custom render function
           eventClick={handleEventClick}
           eventsSet={handleEvents}
+          // FIXME: send to db
+          eventAdd={(response) => addEvents(response)}
+          eventChange={(response) => console.log('[eventChange] result: ', response) }
+          eventRemove={(response) => console.log('[eventRemove] result: ', response) }
+
         />
       </div>
     </div>
