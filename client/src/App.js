@@ -1,33 +1,72 @@
-import React from "react";
-import NavBar from "./components/NavBar"
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import CalendarMain from "./views/CalendarMain";
-import Notes from "./views/Notes";
-import Footer from './components/Footer';
+
+
 import Events from './views/Events';
 
+import React, { useState } from "react";
+import NavBar from "./components/NavBar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CalendarMain from "./views/CalendarMain";
+import Note from "./views/Notes";
+import NewNote from "./views/NewNote";
+import NoteList from "./views/NoteList";
+import NoteCounter from "./views/NoteCount";
+import EditNote from "./views/EditNote";
+import Footer from "./components/Footer";
+
+
+import {useHistory} from 'react-router-dom';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
+import config from './config';
+import Home from './Home';
+
+const oktaAuth = new OktaAuth(config.oidc);
 
 function App() {
+  const history = useHistory(); // example from react-router
+
+  const customAuthHandler = () => {
+    // Redirect to the /login page that has a CustomLoginComponent
+    history.push('/');
+  };
+
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Security
+      oktaAuth={oktaAuth}
+      onAuthRequired={customAuthHandler}
+    >
       <div>
         <NavBar />
-          <div className="container">
-            <Switch>
-              <Route exact path='/CalendarMain'>
-                <CalendarMain />
-              </Route>
-              <Route path='/Notes'>
-                <Notes />
-              </Route>
-              <Route path='/Events'>
-                <Events />
-              </Route>
-            </Switch>
-          </div>
+        <div className="container">
+          <Switch>
+            <Route path="/login" exact component={Home} />
+            <Route exact path="/CalendarMain">
+              <CalendarMain />
+            </Route>
+            <Route path="/NewNote">
+              <NewNote />
+            </Route>
+            <Route path="/Notes">
+              <Note />
+            </Route>
+            <Route path="/NoteList">
+              <NoteList />
+            </Route>
+            <Route path="/NoteCount">
+              <NoteCounter />
+            </Route>
+            <Route path="/EditNote">
+              <EditNote />
+            </Route>
+            <Route path='/Events'>
+               <Events />
+            </Route>
+          </Switch>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </Router>
+    </Security>
+
   );
 }
 
