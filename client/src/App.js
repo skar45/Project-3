@@ -1,3 +1,7 @@
+
+
+import Events from './views/Events';
+
 import React, { useState } from "react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -54,12 +58,17 @@ function App() {
             <Route path="/EditNote">
               <EditNote />
             </Route>
+            <Route path='/Events'>
+               <Events />
+            </Route>
           </Switch>
         </div>
         <Footer />
       </div>
     </Security>
+
   );
 }
 
 export default App;
+
