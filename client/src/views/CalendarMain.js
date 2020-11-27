@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
 import API from '../utils/API'
 
+
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
@@ -60,15 +61,20 @@ export default function CalendarMain() {
 
   return (
     <div className="App">
-      <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
       <div className="container">
+        <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
         <h1>Good Morning, Dailey</h1>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridWeek",
+            right: "",
+          }}
+          footerToolbar={{
+            left: "",
+            center: "dayGridMonth,timeGridWeek,timeGridDay",
+            right: "",
           }}
           initalView="dayGridMonth"
           editable={true}
