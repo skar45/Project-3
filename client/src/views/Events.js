@@ -1,7 +1,7 @@
 import React from "react";
 import Duckie from "../components/assets/Duckie.png";
 import Ocean from "../components/assets/Ocean.png";
-
+import './styles.css'
 
 function Events(props) {
     return (
