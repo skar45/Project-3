@@ -27,9 +27,11 @@ const Home = () => {
  
   if(!authState.isAuthenticated) {
     return (
-      <div>
-        <p>Not Logged in yet</p>
-        <button onClick={login}>Login</button>
+      <div className="container loginContainer">
+        <div className="loginBox">
+          <p>Not Logged in yet</p>
+          <button onClick={login} type="button" className="btn btn-light">Login</button>
+        </div>
       </div>
     );
   }
