@@ -18,8 +18,10 @@ import { Button, Header } from 'semantic-ui-react';
 const Home = () => {
   const { oktaAuth, authState } = useOktaAuth();
  
-  const login = async () => oktaAuth.signInWithRedirect('/');
-  const logout = async () => oktaAuth.signOut('/');
+  const login = async () => {
+    oktaAuth.signInWithRedirect('/login');
+  }
+  const logout = async () => oktaAuth.signOut('/login');
   console.log('oktaAuth: ',oktaAuth)
   if(authState.isPending) {
     return <div>Loading...</div>;

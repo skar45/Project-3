@@ -3,7 +3,8 @@ import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "../components/event-utils";
+import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
+import API from '../utils/API'
 
 
 export default function CalendarMain() {
@@ -46,6 +47,18 @@ export default function CalendarMain() {
     setCurrentEvents(events);
   }
 
+  async function addEvents(data){
+    let newEvent = {
+      id: data.event.id,
+      title: data.event.title,
+      start: data.event.start,
+      end: data.event.end
+    }
+
+    let result = await API.addEvent(newEvent)
+    console.log(result)
+  }
+
   return (
     <div className="App">
       <div className="container">
@@ -74,6 +87,9 @@ export default function CalendarMain() {
           eventContent={renderEventContent} // custom render function
           eventClick={handleEventClick}
           eventsSet={handleEvents}
+          eventAdd={(response) => addEvents(response)}
+          eventChange={(response) => console.log(response)}
+          eventRemove={(response) => console.log(response)}
         />
       </div>
     </div>
