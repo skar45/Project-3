@@ -12,7 +12,7 @@ import NoteList from "./views/NoteList";
 import NoteCounter from "./views/NoteCount";
 import EditNote from "./views/EditNote";
 import Footer from "./components/Footer";
-
+import Kanban from './components/KanBan'
 
 import {useHistory} from 'react-router-dom';
 import { OktaAuth } from '@okta/okta-auth-js';
@@ -39,7 +39,8 @@ function App() {
         <NavBar />
         <div className="container">
           <Switch>
-            <Route path="/login" exact component={Home} />
+            <Route path="/" exact component={Home} />
+            <Route path="/login/callback" component={LoginCallback} />
             <Route exact path="/CalendarMain">
               <CalendarMain />
             </Route>
@@ -61,7 +62,9 @@ function App() {
             <Route path='/Events'>
                <Events />
             </Route>
-            <Route path="/login/callback" component={LoginCallback} />
+            <Route path='/Kanban'>
+                <Kanban />
+            </Route>
           </Switch>
         </div>
         <Footer />

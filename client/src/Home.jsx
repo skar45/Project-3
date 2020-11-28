@@ -18,8 +18,10 @@ import { Button, Header } from 'semantic-ui-react';
 const Home = () => {
   const { oktaAuth, authState } = useOktaAuth();
  
-  const login = async () => oktaAuth.signInWithRedirect('/');
-  const logout = async () => oktaAuth.signOut('/');
+  const login = async () => {
+    oktaAuth.signInWithRedirect('/login');
+  }
+  const logout = async () => oktaAuth.signOut('/login');
   console.log('oktaAuth: ',oktaAuth)
   if(authState.isPending) {
     return <div>Loading...</div>;
@@ -27,9 +29,11 @@ const Home = () => {
  
   if(!authState.isAuthenticated) {
     return (
-      <div>
-        <p>Not Logged in yet</p>
-        <button onClick={login}>Login</button>
+      <div className="container loginContainer">
+        <div className="loginBox">
+          <p>Not Logged in yet</p>
+          <button onClick={login} type="button" className="btn btn-light">Login</button>
+        </div>
       </div>
     );
   }

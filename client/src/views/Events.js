@@ -4,6 +4,8 @@ import Ocean from "../components/assets/Ocean.png";
 import moment from 'moment'
 import { useOktaAuth } from '@okta/okta-react';
 import AllEvents from '../components/AllEvents'
+import './styles.css'
+
 
 function Events(props) {
   const [greeting, setGreeting] = useState("")

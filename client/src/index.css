@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #eff3f4;
+  background: #F2E291;
 }
 
 code {
@@ -29,7 +29,7 @@ a:hover {
 
 /* note Styles */
 .note-container {
-  background: #fff;
+  background: #e4f1f2;
   padding: 50px;
   width: 100%;
   margin: 40px auto;
@@ -41,7 +41,7 @@ a:hover {
   text-align: center;
   font-weight: 400;
   font-size: 40px;
-  color: #636363;
+  color: black;
 }
 
 .form {
@@ -85,24 +85,25 @@ a:hover {
   text-align: center;
   font-weight: 400;
   font-size: 40px;
-  color: #636363;
+  color: black;
   word-wrap: break-word;
 }
 
 .note {
-  background: #02b3e4;
+  background: #e4f1f2;
   width: 100%;
   margin: 0 auto;
-  padding: 5px;
-  margin-bottom: 10px;
+  padding: 10px;
+  /* margin-bottom: 10px; */
+  margin-top: 25px;
   box-shadow: 10px 10px 12px 0 rgba(46, 60, 73, 0.05);
 }
 
 .form button {
-  background: #2402e4;
+  background: #0D8AA6;
   padding: 15px 40px;
   text-align: center;
-  color: #fff;
+  color: #F2E291;
   font-family: "Work Sans", sans-serif;
   border-radius: 4px;
   border: none;
@@ -113,7 +114,7 @@ a:hover {
   font-weight: 400;
   text-align: center;
   font-size: 20px;
-  color: #636363;
+  color: black;
   word-wrap: break-word;
 }
 
@@ -130,23 +131,23 @@ a:hover {
 }
 
 .delete {
-  background: #ff7777;
+  background: #f2cd13;
   border: none;
   text-align: center;
   font-size: 15px;
   padding: 5px 5px;
   cursor: pointer;
   outline: none;
-  color: #fff;
+  color: black;
 }
 
 .edit {
-  background: #1102e4;
+  background: #0D8AA6;
   border: none;
   text-align: center;
   font-size: 15px;
   padding: 5px 5px;
   cursor: pointer;
   outline: none;
-  color: #fff;
+  color: #F2E291;
 }
