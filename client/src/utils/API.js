@@ -21,5 +21,8 @@ export default {
     },
     getNotes: function(){
         return axios.get("/api/notes")
+    },
+    addUser: function(){
+        return axios.get("/api/users")
     }
 }

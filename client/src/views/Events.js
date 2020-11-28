@@ -5,6 +5,7 @@ import moment from 'moment'
 import { useOktaAuth } from '@okta/okta-react';
 import AllEvents from '../components/AllEvents'
 import './styles.css'
+import API from "../utils/API";
 
 
 function Events(props) {
@@ -18,12 +19,16 @@ function Events(props) {
       setUserInfo(null);
     } else {
       oktaAuth.getUser().then((info) => {
-        console.log(info)
         setUserInfo(info.given_name);
+        sendLoginInfo(info)
       });
     }
     timeOfDay()
   }, [authState, oktaAuth]);
+
+  async function sendLoginInfo(data){
+    let result = await API.addUser()
+  }
 
   function timeOfDay(){
     let currentTime = Number(moment().format("H"))
@@ -31,7 +36,7 @@ function Events(props) {
       setGreeting("Good Morning")
     } else if (currentTime >= 12 && currentTime < 17){
       setGreeting("Good Afternoon")
-    }else if (currentTime > 17){
+    }else if (currentTime >= 17){
       setGreeting("Good Evening")
     } 
   }

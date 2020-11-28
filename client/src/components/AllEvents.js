@@ -10,28 +10,23 @@ function AllEvents(){
 
     async function getEvents(){
         let eventsData = await API.getEvents() 
+        console.log('getEvents home :', eventsData.data)
         setEvents(eventsData.data)
     }
 
     return (
         <section>
-            <h2>Upcoming Events</h2>
+            <h2>Upcoming Events ({events.length})</h2>
             <ul>{events.length ?
-            events.map((event) => {
+            events.map((user) => {
                 return(
-                <div class="card text-center">
-                <div class="card-header">
-                  Featured
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">{event.title}</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-                <div class="card-footer text-muted">
-                  2 days ago
-                </div>
-              </div>)
+                    <div className="card" style={{width: "18rem"}}>
+                    <div className="card-body">
+                      <h5 className="card-title">{user.events.title}</h5>
+                      <p className="card-text">{user.events.start}</p>
+                      <a href="/CalendarMain" className="btn btn-primary">View in Calendar</a>
+                    </div>
+                  </div>)
               })
             : <h4>No Results to Display</h4>
             }
