@@ -3,7 +3,7 @@ import Duckie from "../components/assets/Duckie.png";
 import Ocean from "../components/assets/Ocean.png";
 import moment from 'moment'
 import { useOktaAuth } from '@okta/okta-react';
-
+import AllEvents from '../components/AllEvents'
 
 function Events(props) {
   const [greeting, setGreeting] = useState("")
@@ -38,6 +38,10 @@ function Events(props) {
       <div className="container">
         <h1>{greeting}, {userInfo}</h1>
         <h3 className="text-muted">{moment().format("[Today is] dddd, MMMM Do YYYY")}</h3>
+
+        <AllEvents />
+
+        <h2>Notes</h2>
       </div>
       
       <div className="duckContainer">
