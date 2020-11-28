@@ -5,18 +5,15 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
 import API from '../utils/API'
-import moment from 'moment'
 
 
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
   const [eventList, setEventList] = useState([])
-  const [greeting, setGreeting] = useState("")
 
   useEffect(() => {
     getEvents()
-    timeOfDay()
   }, [])
 
   function handleWeekendsToggle() {
@@ -83,22 +80,10 @@ export default function CalendarMain() {
     let result = await API.deleteEvent(data.event.id)
   }
 
-  function timeOfDay(){
-    let currentTime = Number(moment().format("H"))
-    if(currentTime >= 0 && currentTime < 12){
-      setGreeting("Good Morning")
-    } else if (currentTime >= 12 && currentTime < 17){
-      setGreeting("Good Afternoon")
-    }else if (currentTime > 17){
-      setGreeting("Good Evening")
-    } 
-  }
-
   return (
     <div className="App">
       <div className="container">
         <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
-        <h1>{greeting}, Dailey</h1>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
@@ -143,7 +128,7 @@ function RenderSidebar(props) {
       </div>
       <div>
         <label>
-          <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} />toggle weekends
+          <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} /> Toggle Weekends
         </label>
       </div>
       <div>
