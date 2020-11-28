@@ -14,5 +14,12 @@ export default {
     },
     deleteEvent: function(id){
         return axios.delete("/api/events/" + id)
+    },
+    saveNote: function(noteData){
+        console.log('api data: ', noteData)
+        return axios.post("/api/notes", noteData)
+    },
+    getNotes: function(){
+        return axios.get("/api/notes")
     }
 }

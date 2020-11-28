@@ -61,6 +61,7 @@ function App() {
             <Route path='/Events'>
                <Events />
             </Route>
+            <Route path="/login/callback" component={LoginCallback} />
           </Switch>
         </div>
         <Footer />
