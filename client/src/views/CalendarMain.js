@@ -10,6 +10,7 @@ import API from '../utils/API'
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
+  const [eventList, setEventList] = useState([])
 
   useEffect(() => {
     getEvents()
@@ -61,13 +62,22 @@ export default function CalendarMain() {
     }
     // console.log(data)
     let result = await API.addEvent(newEvent)
-    console.log(result)
   }
 
+  // TODO: send to utils
   async function getEvents(){
     //console.log('Hello')
     let result = await API.getEvents()
-    console.log(result)
+    console.log('[getEvents]:', result.data)
+    setEventList(result.data)
+  }
+
+  async function updateEvent(data){
+    let result = await API.updateEvent(data)
+  }
+
+  async function deleteEvent(data){
+    let result = await API.deleteEvent(data.event.id)
   }
 
   return (
@@ -93,14 +103,14 @@ export default function CalendarMain() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-          initialEvents={INITIAL_EVENTS} // or use 'events' setting to fetch from a feed
+          events={eventList} //TODO: or use 'events' setting to fetch from a feed
           select={handleDateSelect}
           eventContent={renderEventContent} // custom render function
           eventClick={handleEventClick}
           eventsSet={handleEvents}
           eventAdd={(response) => addEvents(response)}
-          eventChange={(response) => console.log(response)}
-          eventRemove={(response) => console.log(response)}
+          eventChange={(response) => updateEvent(response)}
+          eventRemove={(response) => deleteEvent(response)}
         />
       </div>
     </div>

@@ -9,10 +9,10 @@ export default {
     getEvents: function(){
         return axios.get("/api/events")
     },
-    updateEvent: function(id, eventData){
-        return axios.put("/api/events" + id, eventData)
+    updateEvent: function(eventData){
+        return axios.put("/api/events/" + eventData.event.id, eventData)
     },
     deleteEvent: function(id){
-        return axios.delete("/api/events" + id)
+        return axios.delete("/api/events/" + id)
     }
 }

@@ -8,12 +8,12 @@ async function findAll(req, res){
 
 async function create(req, res){
     console.log('Controller.create function reached ... Data received: ', req.body)
-    //let result = await db.Event.create(req.body)
+    let result = await db.Event.create(req.body)
 }
 
 async function update(req, res){
-    console.log(`Params: ${req.params}, Body: ${req.body}`)
-    //let result = await db.Event.findOneAndUpdate()
+    console.log(`Params: ${JSON.stringify(req.params)}, Body: ${JSON.stringify(req.body)}, new Data: ${JSON.stringify(req.body.event)}`)
+    let result = await db.Event.findOneAndUpdate({id: req.params.id}, req.body.event)
 }
 
 async function remove(req, res){
