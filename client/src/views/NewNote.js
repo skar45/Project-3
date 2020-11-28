@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import API from '../utils/API'
+
 class NewNote extends Component {
+
+  saveNote = async (note) => {
+    let result = await API.saveNote(note)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     //const title = this.getTitle.value;
@@ -15,6 +22,9 @@ class NewNote extends Component {
       type: "ADD_NOTE",
       data,
     });
+
+    this.saveNote(data)
+
     //clear input box
     this.getTitle.value = "";
     this.getMessage.value = "";

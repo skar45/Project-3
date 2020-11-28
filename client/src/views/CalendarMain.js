@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -10,6 +10,11 @@ import API from '../utils/API'
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
+  const [eventList, setEventList] = useState([])
+
+  useEffect(() => {
+    getEvents()
+  }, [])
 
   function handleWeekendsToggle() {
     setWeekendsVisible(!weekendsVisible);
@@ -52,18 +57,33 @@ export default function CalendarMain() {
       id: data.event.id,
       title: data.event.title,
       start: data.event.start,
-      end: data.event.end
+      end: data.event.end,
+      allDay: data.event.allDay
     }
-
+    // console.log(data)
     let result = await API.addEvent(newEvent)
-    console.log(result)
+  }
+
+  // TODO: send to utils
+  async function getEvents(){
+    //console.log('Hello')
+    let result = await API.getEvents()
+    console.log('[getEvents]:', result.data)
+    setEventList(result.data)
+  }
+
+  async function updateEvent(data){
+    let result = await API.updateEvent(data)
+  }
+
+  async function deleteEvent(data){
+    let result = await API.deleteEvent(data.event.id)
   }
 
   return (
     <div className="App">
       <div className="container">
         <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
-        <h1>Good Morning, Dailey</h1>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
@@ -82,14 +102,14 @@ export default function CalendarMain() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-          initialEvents={INITIAL_EVENTS} // or use 'events' setting to fetch from a feed
+          events={eventList} //TODO: or use 'events' setting to fetch from a feed
           select={handleDateSelect}
           eventContent={renderEventContent} // custom render function
           eventClick={handleEventClick}
           eventsSet={handleEvents}
           eventAdd={(response) => addEvents(response)}
-          eventChange={(response) => console.log(response)}
-          eventRemove={(response) => console.log(response)}
+          eventChange={(response) => updateEvent(response)}
+          eventRemove={(response) => deleteEvent(response)}
         />
       </div>
     </div>
@@ -108,7 +128,7 @@ function RenderSidebar(props) {
       </div>
       <div>
         <label>
-          <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} />toggle weekends
+          <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} /> Toggle Weekends
         </label>
       </div>
       <div>
