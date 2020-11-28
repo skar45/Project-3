@@ -4,7 +4,7 @@ import axios from 'axios'
 export default {
     addEvent: function(eventData){
         //console.log('API add event retrieved data: ', eventData)
-        return axios.get("/api/events", eventData)
+        return axios.post("/api/events", eventData)
     },
     getEvents: function(){
         return axios.get("/api/events")

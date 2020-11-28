@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -10,6 +10,10 @@ import API from '../utils/API'
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
+
+  useEffect(() => {
+    getEvents()
+  }, [])
 
   function handleWeekendsToggle() {
     setWeekendsVisible(!weekendsVisible);
@@ -52,10 +56,17 @@ export default function CalendarMain() {
       id: data.event.id,
       title: data.event.title,
       start: data.event.start,
-      end: data.event.end
+      end: data.event.end,
+      allDay: data.event.allDay
     }
-
+    // console.log(data)
     let result = await API.addEvent(newEvent)
+    console.log(result)
+  }
+
+  async function getEvents(){
+    //console.log('Hello')
+    let result = await API.getEvents()
     console.log(result)
   }
 

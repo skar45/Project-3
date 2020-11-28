@@ -12,15 +12,12 @@ app.use(express.json());
 // // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
    app.use(express.static("client/build"));
-// }
+}
 
 // // Define API routes here
 
-// app.get( '/api/list', function( req, res ){
-//   res.send( [ "victor", "leah", "david", "levi", "cecil", "jojoe", "ryan", "shaun"] )
-// })
-
 app.use(routes)
+
 // Send every other request to the React app
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/producky", {
@@ -34,7 +31,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/producky", {
 
 app.get("*", (req, res) => {
    res.sendFile(path.join(__dirname, "./client/build/index.html"));
- });
+});
 
 
 
