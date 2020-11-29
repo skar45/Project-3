@@ -9,7 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Zoom from '@material-ui/core/Zoom';
 import ListItem from '@material-ui/core/ListItem';
-
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -51,20 +51,22 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+
+
+const useStyles = makeStyles((matches) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 1100,
+    backgroundColor: 'white',
+    width: matches?1100:1100,
     position: 'relative',
     minHeight: 200,
   },
   fab: {
     position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: '8px',
+    right: '8px',
   },
   fabGreen: {
-    color: theme.palette.common.white,
+    color: 'white',
     backgroundColor: green[500],
     '&:hover': {
       backgroundColor: green[600],
@@ -78,8 +80,11 @@ export default function FloatingActionButtonZoom() {
   const [todoInput,setInput] = React.useState([])
   const [doingInput, setDoing] = React.useState([])
   const [doneInput, setDone] = React.useState([])
-  const classes = useStyles();
+  const matches = useMediaQuery('(max-width:320px)');
+  console.log(matches)
   const theme = useTheme();
+  const classes = useStyles(matches);
+  
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {

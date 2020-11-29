@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import API from '../utils/API'
+import Emoji from '../components/Emojiis'
 
 class NewNote extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      emoji : ""
+    };
+  }
 
   saveNote = async (note) => {
     let result = await API.saveNote(note)
@@ -31,7 +39,7 @@ class NewNote extends Component {
   };
   render() {
     return (
-      <div className="note-container">
+      <div className="note-container" style={{position: "relative"}}>
         <h1 className="note_heading">Create Note</h1>
         <form className="form" onSubmit={this.handleSubmit}>
           <input
@@ -48,7 +56,12 @@ class NewNote extends Component {
             ref={(input) => (this.getMessage = input)}
             cols="28"
             placeholder="Enter Note"
+
           />
+          <Emoji data={(el)=>{
+            this.setState({emoji:el});
+            this.getMessage.value += this.state.emoji
+          }}></Emoji>
           <br />
           <br />
           <button>Note</button>
