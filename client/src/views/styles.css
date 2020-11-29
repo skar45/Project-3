@@ -14,7 +14,7 @@ footer {
     padding: 7px;
 }
 
-img {
+.rubberducky {
     width: 35px;
 }
 
@@ -64,6 +64,21 @@ body {
     color: #f2cd13 !important;
     font-size: large;
 }
+
+.card-body {
+    background-color: #E4F1F2;
+}
+
+.card {
+    background-color: #f2cd13;
+    margin: 10px;
+}
+
+section {
+    padding: 10px;
+}
+
+/*Swimming Duckie*/
 
 @keyframes duckieSwim {
     0%{
@@ -130,8 +145,8 @@ body {
 .duckContainer{
     width: 130%;
     height: 10%;
-    position: fixed;
-    bottom: 5%;
+    position: absolute;
+    bottom: 0;
 }
 img.ocean {
     width: 120%;
@@ -156,3 +171,60 @@ img.duckie {
       /*animation-direction: alternate;*/
       right: -5%;
 }
+
+/*Login Page*/
+
+.loginBox {
+    background-color: #f2cd13;
+    font-family: 'Lato', sans-serif;
+    text-align: center; 
+    margin-top: 10vh;  
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.btn {
+    background-color: #0D8AA6 !important;
+    color: #F2E291 !important;
+}
+
+@keyframes loginContainer {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+
+}
+
+.loginContainer {
+    background: linear-gradient(-45deg, #0d8aa6, #e4f1f2,  #f2e291, #f2cd13);
+	background-size: 800% 800%;
+    width: 100%;
+	animation: loginContainer 5s linear infinite;
+    position: absolute;
+    min-height: 100vh;
+    
+    left: 0;
+
+}
+
+.logo {
+    width:50%;
+    margin-top: 20vh;
+    margin-left: 25%;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        width:75%;
+        margin-top: 20vh;
+        margin-left: 12%;
+    }
+  }

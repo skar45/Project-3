@@ -14,6 +14,8 @@ import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Header } from 'semantic-ui-react';
+import Producky from './components/assets/Producky.png'
+
 
 const Home = () => {
   const { oktaAuth, authState } = useOktaAuth();
@@ -29,7 +31,10 @@ const Home = () => {
  
   if(!authState.isAuthenticated) {
     return (
-      <div className="container loginContainer">
+      <div className="container-fluid loginContainer">
+        <div className="logo-container">
+          <img className="logo" src={Producky} alt="Producky logo" />
+        </div>
         <div className="loginBox">
           <p>Not Logged in yet</p>
           <button onClick={login} type="button" className="btn btn-light">Login</button>
@@ -39,9 +44,14 @@ const Home = () => {
   }
  
   return (
-    <div>
-      <p>Logged in!</p>
-      <button onClick={logout}>Logout</button>
+    <div className="container-fluid loginContainer">
+      <div className="logo-container">
+          <img className="logo" src={Producky} alt="Producky logo" />
+        </div>
+      <div className="loginBox">
+        <p>Logged in!</p>
+        <button onClick={logout} type="button" className="btn btn-light">Logout</button>
+      </div>  
     </div>
   );
 };

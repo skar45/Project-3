@@ -19,19 +19,20 @@ function AllEvents(){
             <ul>{events.length ?
             events.map((event) => {
                 return(
-                <div class="card text-center">
-                <div class="card-header">
-                  Featured
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">{event.title}</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-                <div class="card-footer text-muted">
-                  2 days ago
-                </div>
-              </div>)
+                  <div className="card text-center rounded-lg">
+                    <div className="card-header">
+                      Start: {event.start}
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">{event.title}</h5>
+                      <p className="card-text"></p>
+                      <a href="#" className="btn btn-primary">Go somewhere</a>
+                    </div>
+                    <div className="card-footer text-muted">
+                      End: {event.end}
+                    </div>
+                  </div>
+                )
               })
             : <h4>No Results to Display</h4>
             }

@@ -6,7 +6,7 @@ import  rubberducky from "./assets/rubberducky.png"
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light nav">
-      <NavLink className="navbar-brand" to="/">Producky <img src={rubberducky} alt="rubber duck" /></NavLink>
+      <NavLink className="navbar-brand" to="/">Producky <img className="rubberducky" src={rubberducky} alt="rubber duck" /></NavLink>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>
