@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 class EditNote extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      message: "",
+    };
+  }
   handleUpdate = (e) => {
     e.preventDefault();
     const newTitle = this.getTitle.value;

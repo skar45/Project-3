@@ -9,7 +9,7 @@ class Note extends Component {
           <h2 className="note_title">{note.title}</h2>
           <p className="note_message">{note.message}</p>
           <div className="control-buttons">
-            <button
+              {/* <button 
               className="edit"
               onClick={
                 () =>
@@ -21,7 +21,7 @@ class Note extends Component {
               }
             >
               Edit
-            </button>
+            </button>  */}
 
             <button
               className="delete"
