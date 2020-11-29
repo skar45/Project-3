@@ -30,6 +30,9 @@ export default function Navbar() {
           <li className="nav-item">
              <NavLink className="nav-link" to="/Events">Events <span className="sr-only"></span></NavLink>
           </li>
+          <li className="nav-item">
+             <NavLink className="nav-link" to="/Kanban">Kanban <span className="sr-only"></span></NavLink>
+          </li>
         </ul>
       </div>
     </nav>

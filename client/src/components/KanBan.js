@@ -95,10 +95,25 @@ export default function FloatingActionButtonZoom() {
     exit: theme.transitions.duration.leavingScreen,
   };
 
-  function changeDoing(text){
+  function changeToDo(text){
     let list = [...doingInput];
     list.push(text)
-    localStorage.setItem("Doing",list)
+    setDoing(list)
+    const todo = [...todoInput.filter(e=>e!==text)]
+    setInput(todo)
+  }
+
+  function changeDoing(text){
+    let list = [...doneInput];
+    list.push(text)
+    setDone(list)
+    const todo = [...doingInput.filter(e=>e!==text)]
+    setDoing(todo)
+  }
+
+  function changeDone(text){
+    const todo = [...doneInput.filter(e=>e!==text)]
+    setDone(todo)
   }
 
   const fabs = [
@@ -117,8 +132,8 @@ export default function FloatingActionButtonZoom() {
     {
       color: 'inherit',
       className: clsx(classes.fab, classes.fabGreen),
-      icon: <UpIcon />,
-      label: 'Expand',
+      icon: <AddIcon />,
+      label: 'Add',
     },
   ];
   return (
@@ -145,23 +160,33 @@ export default function FloatingActionButtonZoom() {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
           {todoInput.map(text=>{
-            return(<ListItem button onClick={()=>changeDoing(text)}>
+            return(<ListItem button onClick={()=>changeToDo(text)}>
               {text} 
               </ListItem>)
             
           })}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          {doingInput}
+          {doingInput.map(text=>{
+            return(<ListItem button onClick={()=>changeDoing(text)}>
+              {text} 
+              </ListItem>)
+            
+          })}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          {doneInput}
+        {doneInput.map(text=>{
+            return(<ListItem button onClick={()=>changeDone(text)}>
+              {text} 
+              </ListItem>)
+            
+          })}
         </TabPanel>
       </SwipeableViews>
       {fabs.map((fab, index) => (
         <Zoom
           key={fab.color}
-          in={value === index}
+          in={value === 0}
           timeout={transitionDuration}
           style={{
             transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,

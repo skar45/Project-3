@@ -18,7 +18,7 @@ export default function FormDialog(props) {
   };
 
   const handleClose = () => {
-    let Input = props.val
+    let Input = [...props.val]
     Input.push(TextField.current.value)
     props.func(Input)
     setOpen(false);
