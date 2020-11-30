@@ -63,11 +63,11 @@ export default function EmojiDrawer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
        <GridList cellHeight={50} cols={4}>
-        {Object.values(emojis).map(e=>{
-            return (
-        <GridListTile  cols={e.cols || 1}>
-            <GridListTileBar title={e} style={{backgroundColor:"#F2E291"}} onClick={()=>props.data(e)}></GridListTileBar>
-        </GridListTile>
+        {Object.values(emojis).map((e)=>{
+          return (
+          <GridListTile  cols={e.cols || 1} style={{backgroundColor:"#F2E291"}}>
+              <GridListTileBar title={e} style={{backgroundColor:"#F2E291"}} onClick={()=>props.data(e)}></GridListTileBar>
+          </GridListTile>
         )})}
       </GridList>
     </div>

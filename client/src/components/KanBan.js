@@ -56,7 +56,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme,matches) => ({
   root: {
     backgroundColor: 'white',
-    width: matches?300:1100,
+    width: matches?500:1100,
     position: 'relative',
     minHeight: 200,
   },
