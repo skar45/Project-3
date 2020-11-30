@@ -73,14 +73,17 @@ export default function CalendarMain() {
     if (result.data){
       let currentUserData = result.data.filter(user => user.email === loggedUser)
       console.log('[currentUserData]:', result.data)
-      setEventList(currentUserData[0].events)
+      if (currentUserData[0].events){
+        setEventList(currentUserData[0].events)
+      }
+      
     }
     
 
   }
 
   async function updateEvent(data){
-    let result = await API.updateEvent(data)
+    let result = await API.updateEvent(data, loggedUser)
   }
 
   async function deleteEvent(data){

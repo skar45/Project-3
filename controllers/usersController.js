@@ -11,7 +11,7 @@ async function createUser(req, res) {
     "Controller.create function reached ... Data received: ",
     req.body
   );
-  // TODO: if statement to detemine if user already exists
+  //if statement to detemine if user already exists
   let dbRes = await db.User.find({email: req.body.email})
   if (!(dbRes == false)) {
     console.log('dbRes=', dbRes)
@@ -22,12 +22,6 @@ async function createUser(req, res) {
   }
   
 }
-
-// //PersonModel.update(
-//     { _id: person._id },
-//     { $push: { friends: friend } },
-//     done
-// );
 
 async function addEvent(req, res) {
   console.log(
@@ -51,12 +45,13 @@ async function updateEvent(req, res) {
   console.log(
     `Params: ${JSON.stringify(req.params)}, Body: ${JSON.stringify(
       req.body
-    )}, new Data: ${JSON.stringify(req.body.event)}`
+    )}, new Data: ${JSON.stringify(req.body.events.event)}`
   );
-  let result = await db.User.find({ events: { id: req.params.id }} )
+  let result = await db.User.find({events:(req.body.event)})
+
   console.log('[updateEvent] function result=', result)
   // let result = await db.User.findOneAndUpdate(
-  //   { events: { id: req.params.id } },
+  //   { User: {events: { id: req.params.id }} },
   //   { events: req.body.event }
   // );
 }
