@@ -60,7 +60,7 @@ function AllEvents(props){
             }
             </ul>
             
-        </section>
+       </section>
     )
 }
 

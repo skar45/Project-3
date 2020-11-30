@@ -37,7 +37,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/producky", {
 
 
 // Define any API routes before this runs
-//app.use(routes)
+app.use(routes)
 
 app.post("/api/twilio", (req, res) => {
    console.log('sending message')
