@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Duckie from "../components/assets/Duckie.png";
 import Ocean from "../components/assets/Ocean.png";
 import moment from 'moment'
@@ -6,12 +6,14 @@ import { useOktaAuth } from '@okta/okta-react';
 import AllEvents from '../components/AllEvents'
 import './styles.css'
 import API from "../utils/API";
+import {UserContext} from '../UserContext'
 
 
 function Events(props) {
   const [greeting, setGreeting] = useState("")
   const { authState, oktaAuth } = useOktaAuth();
-  const [userInfo, setUserInfo] = useState(null);
+  //const [userInfo, setUserInfo] = useState(null);
+  const {userInfo, setUserInfo} = useContext(UserContext)
 
   useEffect(() => {
     if (!authState.isAuthenticated) {
@@ -19,15 +21,17 @@ function Events(props) {
       setUserInfo(null);
     } else {
       oktaAuth.getUser().then((info) => {
-        setUserInfo(info.given_name);
+        console.log('[okta getUser]: ', info)
+        setUserInfo(info);
         sendLoginInfo(info)
       });
     }
     timeOfDay()
-  }, [authState, oktaAuth]);
+  }, [authState, oktaAuth, setUserInfo]); //FIXME: maybe remove setUserInfo
 
   async function sendLoginInfo(data){
-    let result = await API.addUser()
+    //console.log('Events page: ', data)
+    let result = await API.addUser(data)
   }
 
   function timeOfDay(){
@@ -43,7 +47,7 @@ function Events(props) {
     return (
     <div>
       <div className="container">
-        <h1>{greeting}, {userInfo}</h1>
+        <h1>{greeting}, {userInfo ? userInfo.given_name : ""}</h1>
         <h3 className="text-muted">{moment().format("[Today is] dddd, MMMM Do YYYY")}</h3>
 
         <AllEvents />

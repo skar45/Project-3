@@ -2,7 +2,7 @@ const db = require("../models")
 
 async function findAll(req, res){
     let result = await db.User.find({notes})
-    console.log('Retrieved from the Database: ', result)
+    console.log('Retrieved from the Database(notes): ', result)
     res.json(result)
 }
 

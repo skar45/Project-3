@@ -1,12 +1,18 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { connect } from "react-redux";
 import API from '../utils/API'
+import { UserContext } from '../UserContext'
 
 class NewNote extends Component {
 
+  static contextType = UserContext
+
   saveNote = async (note) => {
-    let result = await API.saveNote(note)
+    const {userInfo} = this.context;
+    let result = await API.saveNote(note, userInfo)
+    //console.log('Adding note', note, userInfo)
   }
+  
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +36,7 @@ class NewNote extends Component {
     this.getMessage.value = "";
   };
   render() {
+    const {userInfo, setUserInfo} = this.context;
     return (
       <div className="note-container">
         <h1 className="note_heading">Create Note</h1>

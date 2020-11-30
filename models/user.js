@@ -11,8 +11,9 @@ const Schema = mongoose.Schema
 // })
 
 const userSchema = new Schema({
-    firstName: String,
-    email: String,
+    given_name: String,
+    family_name: String,
+    email: {type: String, unique: true},
     events: [{
         id: String,
         title: String,
