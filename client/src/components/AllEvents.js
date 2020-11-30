@@ -33,6 +33,9 @@ function AllEvents(props){
         console.log('date', dateComponent);
         console.log('time', timeComponent);
         return dateComponent + ' ' + timeComponent
+
+    async function twilioReq(msg,time){
+      const result = await fetch('http://localhost:3000/api/twilio',{method:'POST', headers:{'Content-Type': 'application/json'},body:JSON.stringify({message: msg, number:'6478638146'})})
     }
 
     return (
@@ -49,6 +52,8 @@ function AllEvents(props){
                       <h5 className="card-title">{event.title}</h5>
                       <p className="card-text"></p>
                       <a href="/CalendarMain" className="btn btn-primary">View in Calendar</a>
+                      <a href="#" className="btn btn-primary" onClick={()=>twilioReq(event.title,event.start)}>Set Reminder</a>
+
                     </div>
                     <div className="card-footer text-muted">
                       End: {convertISO(event.end)}
@@ -60,7 +65,7 @@ function AllEvents(props){
             }
             </ul>
             
-        </section>
+       </section>
     )
 }
 

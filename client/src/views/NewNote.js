@@ -68,8 +68,8 @@ class NewNote extends Component {
 
           />
           <Emoji data={(el)=>{
-            this.setState({emoji:el});
-            this.getMessage.value += this.state.emoji
+            this.setState({emoji:el},()=>{this.getMessage.value += this.state.emoji});
+            
           }}></Emoji>
           <br />
           <br />
