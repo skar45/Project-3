@@ -53,7 +53,7 @@ function a11yProps(index) {
 
 
 
-const useStyles = makeStyles((matches) => ({
+const useStyles = makeStyles((theme,matches) => ({
   root: {
     backgroundColor: 'white',
     width: matches?300:1100,
@@ -80,10 +80,11 @@ export default function FloatingActionButtonZoom() {
   const [todoInput,setInput] = React.useState([])
   const [doingInput, setDoing] = React.useState([])
   const [doneInput, setDone] = React.useState([])
-  const matches = useMediaQuery('(max-width:320px)');
-  console.log(matches)
+  
+  const matches = useMediaQuery('(max-width:360px)');
+  console.log("media query: ", matches)
   const theme = useTheme();
-  const classes = useStyles(matches);
+  const classes = useStyles(theme,matches);
   
   const [value, setValue] = React.useState(0);
 
@@ -142,7 +143,7 @@ export default function FloatingActionButtonZoom() {
     },
   ];
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{}}>
       
       <AppBar position="static" color="default">
         <Tabs

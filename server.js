@@ -10,7 +10,18 @@ const authToken = '1efd74c4937b760e728621e5c125a1a4'||process.env.TWILIO_AUTH_TO
 const client = require('twilio')(accountSid, authToken);
 
 
-
+// app.use(session({
+//    secret: 'this should be secure',
+//    resave: true,
+//    saveUninitialized: false
+// }));
+ 
+// const oidc = new ExpressOIDC({
+//    issuer: 'https://dev-7705867.okta.com/oauth2/default',
+//    client_id: '0oa1d3kgklSfhS18Z5d6',
+//    redirect_uri: 'http://localhost:8080/login/callback',
+//    scope: 'openid profile'
+// });
 
 
 
