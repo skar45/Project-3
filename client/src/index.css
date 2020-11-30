@@ -35,6 +35,7 @@ a:hover {
   margin: 40px auto;
   box-shadow: 0 5px 15px 0 rgba(46, 61, 73, 0.12);
   font-family: "Work Sans", sans-serif;
+  border-radius: 10px;
 }
 
 .note_heading {
@@ -151,3 +152,5 @@ a:hover {
   outline: none;
   color: #F2E291;
 }
+
+

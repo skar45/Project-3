@@ -37,13 +37,20 @@ function AllEvents(props){
             <ul>{events.length ?
             events.map((event) => {
                 return(
-                    <div className="card" style={{opacity: '90%', backgroundColor: 'lightgray'}}>
+                  <div className="card text-center rounded-lg">
+                    <div className="card-header">
+                      Start: {convertISO(event.start)}
+                    </div>
                     <div className="card-body">
                       <h5 className="card-title">{event.title}</h5>
-                      <p className="card-text">{convertISO(event.start)}</p>
-                      <a href="/CalendarMain" className="btn btn-primary">View in Calendar</a>
+                      <p className="card-text"></p>
+                      <a href="/CalendarMain" className="btn btn-primary">Go somewhere</a>
                     </div>
-                  </div>)
+                    <div className="card-footer text-muted">
+                      End: {convertISO(event.end)}
+                    </div>
+                  </div>
+                )
               })
             : <h4>No Results to Display</h4>
             }

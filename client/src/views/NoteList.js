@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Note from "./Notes";
+import Notes from "./Notes";
 import EditNote from "./EditNote";
+import NewNote from "./NewNote";
 
 class NoteList extends Component {
   render() {
@@ -12,9 +13,8 @@ class NoteList extends Component {
           <div key={note.id}>
             {note.editing ? (
               <EditNote note={note} key={note.id} />
-            ) : (
-              <Note key={note.id} note={note} />
-            )}
+            ):
+            (<NewNote note ={note} key={note.id}/>)}
           </div>
         ))}
       </div>
