@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
+//import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
 import API from '../utils/API'
+import {UserContext} from '../UserContext'
+import { v4 as uuidv4 } from 'uuid'
 
 
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
   const [eventList, setEventList] = useState([])
+  const {userInfo, setUserInfo} = useContext(UserContext)
+  const [userEmail, setUserEmail] = useState("")
+  const loggedUser = localStorage.getItem('user')
 
   useEffect(() => {
     getEvents()
@@ -28,7 +33,7 @@ export default function CalendarMain() {
 
     if (title) {
       calendarApi.addEvent({
-        id: createEventId(),
+        id: uuidv4(),
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
@@ -60,16 +65,18 @@ export default function CalendarMain() {
       end: data.event.end,
       allDay: data.event.allDay
     }
-    // console.log(data)
-    let result = await API.addEvent(newEvent)
+    let result = await API.addEvent(newEvent, loggedUser)
   }
 
-  // TODO: send to utils
   async function getEvents(){
-    //console.log('Hello')
-    let result = await API.getEvents()
-    console.log('[getEvents]:', result.data)
-    setEventList(result.data)
+    let result = await API.getInfo()
+    if (result.data){
+      let currentUserData = result.data.filter(user => user.email === loggedUser)
+      console.log('[currentUserData]:', result.data)
+      setEventList(currentUserData[0].events)
+    }
+    
+
   }
 
   async function updateEvent(data){
@@ -83,6 +90,7 @@ export default function CalendarMain() {
   return (
     <div className="App">
       <div className="container">
+        <pre>{JSON.stringify(userInfo)}</pre>
         <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

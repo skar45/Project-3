@@ -1,16 +1,34 @@
 import React, {useState, useEffect} from 'react'
 import API from '../utils/API'
+import moment from 'moment'
 
-function AllEvents(){
+function AllEvents(props){
+    const loggedUser = localStorage.getItem('user')
     const [events, setEvents] = useState([])
 
     useEffect(() => {
         getEvents()
     },[])
-
+    
     async function getEvents(){
-        let eventsData = await API.getEvents() 
-        setEvents(eventsData.data)
+        let eventsData = await API.getInfo() 
+        console.log('props=', loggedUser)
+        let currentUserData = eventsData.data.filter(user => user.email === loggedUser)
+        // console.log('getEvents home :', eventsData.data)
+        // TODO: error handling
+        console.log('currentUserData=', currentUserData[0])
+        setEvents(currentUserData[0].events)
+    }
+
+    function convertISO(date){
+        if(date){
+            // let startStr = date.replace(/T.*$/, '')
+            // return startStr
+            return moment().format(date)
+        } else{
+            return 'sorry pal'
+        }
+        
     }
 
     async function twilioReq(msg,time){
@@ -19,13 +37,13 @@ function AllEvents(){
 
     return (
         <section>
-            <h2>Upcoming Events</h2>
+            <h2>Upcoming Events ({events.length})</h2>
             <ul>{events.length ?
             events.map((event) => {
                 return(
                   <div className="card text-center rounded-lg">
                     <div className="card-header">
-                      Start: {event.start}
+                      Start: {convertISO(event.start)}
                     </div>
                     <div className="card-body">
                       <h5 className="card-title">{event.title}</h5>
@@ -33,7 +51,7 @@ function AllEvents(){
                       <a href="#" className="btn btn-primary" onClick={()=>twilioReq(event.title,event.start)}>Set Reminder</a>
                     </div>
                     <div className="card-footer text-muted">
-                      End: {event.end}
+                      End: {convertISO(event.end)}
                     </div>
                   </div>
                 )

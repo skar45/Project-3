@@ -1,21 +1,13 @@
 const router = require("express").Router()
-const eventsController = require('../../controllers/eventsController')
-
-// router.get("/api/events", function(req, res){
-//     return res.send('GET I have arrived')
-// })
-
-// router.post("/api/events", async function(req, res){
-//    return res.send('POST I have arrived')
-// })
+const usersController = require('../../controllers/usersController')
 
 router.route("/")
-    .get(eventsController.findAll)
-    .post(eventsController.create)
+    .get(usersController.findAll)
+    .post(usersController.addEvent)
     
 router
     .route("/:id")
-    .put(eventsController.update)
-    .delete(eventsController.remove)
+    .put(usersController.updateEvent)
+    .delete(usersController.removeEvent)
 
 module.exports = router

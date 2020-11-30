@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import EditNote from "./EditNote";
 //import noteReducer from ".. /reducers/noteReducer";
 class Note extends Component {
   render() {
@@ -9,7 +10,7 @@ class Note extends Component {
           <h2 className="note_title">{note.title}</h2>
           <p className="note_message">{note.message}</p>
           <div className="control-buttons">
-            <button
+             <button
               className="edit"
               onClick={
                 () =>
@@ -17,7 +18,7 @@ class Note extends Component {
                     type: "EDIT_NOTE",
                     id: note.id,
                   })
-                //this.props.location.push("/editNotes");
+                //this.props.location.pop("/EditNotes")
               }
             >
               Edit
