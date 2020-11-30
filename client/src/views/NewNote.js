@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import { connect } from "react-redux";
 import API from '../utils/API'
 import { UserContext } from '../UserContext'
+import { v4 as uuidv4 } from 'uuid'
 
 class NewNote extends Component {
 
@@ -19,7 +20,7 @@ class NewNote extends Component {
     //const title = this.getTitle.value;
     //const message = this.getMessage.value;
     const data = {
-      id: new Date(),
+      id: uuidv4(),
       title: this.getTitle.value,
       message: this.getMessage.value,
       editing: false,

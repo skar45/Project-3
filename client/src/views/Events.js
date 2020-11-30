@@ -50,9 +50,7 @@ function Events(props) {
         <h1>{greeting}, {userInfo ? userInfo.given_name : ""}</h1>
         <h3 className="text-muted">{moment().format("[Today is] dddd, MMMM Do YYYY")}</h3>
 
-        <AllEvents />
-
-        <h2>Notes</h2>
+        <AllEvents user={userInfo}/>
       </div>
       
       <div className="duckContainer">

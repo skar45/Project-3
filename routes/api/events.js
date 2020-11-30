@@ -1,14 +1,13 @@
 const router = require("express").Router()
-const eventsController = require('../../controllers/eventsController')
 const usersController = require('../../controllers/usersController')
 
 router.route("/")
-    .get(eventsController.findAll)
+    .get(usersController.findAll)
     .post(usersController.addEvent)
     
 router
     .route("/:id")
-    .put(eventsController.update)
-    .delete(eventsController.remove)
+    .put(usersController.updateEvent)
+    .delete(usersController.removeEvent)
 
 module.exports = router

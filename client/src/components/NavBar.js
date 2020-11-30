@@ -13,9 +13,12 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <NavLink className="nav-link" to="/CalendarMain">
+            <NavLink className="nav-link" to="/Events">
               Home <span className="sr-only">(current)</span>
             </NavLink>
+          </li>
+          <li className="nav-item">
+             <NavLink className="nav-link" to="/CalendarMain">Calendar <span className="sr-only"></span></NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/NewNote">
@@ -27,9 +30,7 @@ export default function Navbar() {
               View Notes <span className="sr-only"></span>
             </NavLink>
           </li>
-          <li className="nav-item">
-             <NavLink className="nav-link" to="/Events">Events <span className="sr-only"></span></NavLink>
-          </li>
+          
         </ul>
       </div>
     </nav>

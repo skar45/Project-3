@@ -1,29 +1,44 @@
 import React, {useState, useEffect} from 'react'
 import API from '../utils/API'
+import moment from 'moment'
 
-function AllEvents(){
+function AllEvents(props){
     const [events, setEvents] = useState([])
 
     useEffect(() => {
         getEvents()
     },[])
-
+    
     async function getEvents(){
-        let eventsData = await API.getEvents() 
-        console.log('getEvents home :', eventsData.data)
-        setEvents(eventsData.data)
+        let eventsData = await API.getInfo() 
+        console.log('props=', props.user.email)
+        let currentUserData = eventsData.data.filter(user => user.email === props.user.email)
+        // console.log('getEvents home :', eventsData.data)
+        console.log('currentUserData=', currentUserData[0])
+        setEvents(currentUserData[0].events)
+    }
+
+    function convertISO(date){
+        if(date){
+            // let startStr = date.replace(/T.*$/, '')
+            // return startStr
+            return moment().format(date)
+        } else{
+            return 'sorry pal'
+        }
+        
     }
 
     return (
         <section>
             <h2>Upcoming Events ({events.length})</h2>
             <ul>{events.length ?
-            events.map((user) => {
+            events.map((event) => {
                 return(
-                    <div className="card" style={{width: "18rem"}}>
+                    <div className="card" style={{opacity: '90%', backgroundColor: 'lightgray'}}>
                     <div className="card-body">
-                      <h5 className="card-title">{user.events.title}</h5>
-                      <p className="card-text">{user.events.start}</p>
+                      <h5 className="card-title">{event.title}</h5>
+                      <p className="card-text">{convertISO(event.start)}</p>
                       <a href="/CalendarMain" className="btn btn-primary">View in Calendar</a>
                     </div>
                   </div>)

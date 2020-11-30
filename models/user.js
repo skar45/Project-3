@@ -15,14 +15,14 @@ const userSchema = new Schema({
     family_name: String,
     email: {type: String, unique: true},
     events: [{
-        id: String,
+        id: {type: String, unique: true},
         title: String,
         start: Date,
         end: Date,
         allDay: Boolean
     }],
     notes: [{
-        id: String,
+        id: {type: String, unique: true},
         title: String,
         description: String
     }]

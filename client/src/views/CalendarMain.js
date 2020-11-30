@@ -3,9 +3,10 @@ import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
+//import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
 import API from '../utils/API'
 import {UserContext} from '../UserContext'
+import { v4 as uuidv4 } from 'uuid'
 
 
 export default function CalendarMain() {
@@ -31,7 +32,7 @@ export default function CalendarMain() {
 
     if (title) {
       calendarApi.addEvent({
-        id: createEventId(),
+        id: uuidv4(),
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
@@ -67,10 +68,16 @@ export default function CalendarMain() {
   }
 
   async function getEvents(){
-    let result = await API.getEvents()
+    let result = await API.getInfo()
     let currentUserData = result.data.filter(user => user.email === userInfo.email)
-    console.log('[currentUserData]:', result.data)
-    setEventList(currentUserData[0].events)
+    console.log('[currentUserData]:', currentUserData)
+    console.log('[userInfo]:', userInfo)
+    // if (result.data){
+    //   let currentUserData = result.data.filter(user => user.email === userInfo.email)
+      
+    //   setEventList(currentUserData[0].events)
+    // }
+    
 
   }
 

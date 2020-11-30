@@ -1,9 +1,8 @@
 const router = require("express").Router()
-const notesController = require('../../controllers/notesController')
 const usersController = require('../../controllers/usersController')
 
 router.route("/")
-    .get(notesController.findAll)
+    .get(usersController.findAll)
     .post(usersController.addNote)
     //.put(usersController.updateNote)
 

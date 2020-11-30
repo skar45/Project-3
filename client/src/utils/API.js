@@ -6,8 +6,8 @@ export default {
         //console.log('API add event retrieved data: ', eventData, userData.email)
         return axios.post("/api/events", {events: eventData, user: userData.email})
     },
-    getEvents: function(){
-        return axios.get("/api/events")
+    getInfo: function(){
+        return axios.get("/api/users")
     },
     updateEvent: function(eventData){
         return axios.put("/api/events/" + eventData.event.id, eventData)
@@ -18,9 +18,6 @@ export default {
     saveNote: function(noteData, userData){
         //console.log('api data: ', noteData)
         return axios.post("/api/notes", {notes: noteData, user: userData.email} )
-    },
-    getNotes: function(){
-        return axios.get("/api/users/notes")
     },
     addUser: function(userData){
         //console.log('API user data received: ', userData)
