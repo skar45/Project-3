@@ -13,6 +13,10 @@ function AllEvents(){
         setEvents(eventsData.data)
     }
 
+    async function twilioReq(msg,time){
+      const result = await fetch('http://localhost:3000/api/twilio',{method:'POST', headers:{'Content-Type': 'application/json'},body:JSON.stringify({message: msg, number:'6478638146'})})
+    }
+
     return (
         <section>
             <h2>Upcoming Events</h2>
@@ -26,7 +30,7 @@ function AllEvents(){
                     <div className="card-body">
                       <h5 className="card-title">{event.title}</h5>
                       <p className="card-text"></p>
-                      <a href="#" className="btn btn-primary">Go somewhere</a>
+                      <a href="#" className="btn btn-primary" onClick={()=>twilioReq(event.title,event.start)}>Set Reminder</a>
                     </div>
                     <div className="card-footer text-muted">
                       End: {event.end}

@@ -66,7 +66,7 @@ export default function EmojiDrawer(props) {
         {Object.values(emojis).map(e=>{
             return (
         <GridListTile  cols={e.cols || 1}>
-            <GridListTileBar title={e} style={{backgroundColor:"white"}} onClick={()=>props.data(e)}></GridListTileBar>
+            <GridListTileBar title={e} style={{backgroundColor:"#F2E291"}} onClick={()=>props.data(e)}></GridListTileBar>
         </GridListTile>
         )})}
       </GridList>
