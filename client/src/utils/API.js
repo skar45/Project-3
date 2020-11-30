@@ -4,7 +4,7 @@ import axios from 'axios'
 export default {
     addEvent: function(eventData, userData){
         //console.log('API add event retrieved data: ', eventData, userData.email)
-        return axios.post("/api/events", {events: eventData, user: userData.email})
+        return axios.post("/api/events", {events: eventData, user: userData})
     },
     getInfo: function(){
         return axios.get("/api/users")
@@ -17,7 +17,7 @@ export default {
     },
     saveNote: function(noteData, userData){
         //console.log('api data: ', noteData)
-        return axios.post("/api/notes", {notes: noteData, user: userData.email} )
+        return axios.post("/api/notes", {notes: noteData, user: userData} )
     },
     addUser: function(userData){
         //console.log('API user data received: ', userData)

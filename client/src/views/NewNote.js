@@ -9,8 +9,9 @@ class NewNote extends Component {
   static contextType = UserContext
 
   saveNote = async (note) => {
+    const loggedUser = localStorage.getItem('user')
     const {userInfo} = this.context;
-    let result = await API.saveNote(note, userInfo)
+    let result = await API.saveNote(note, loggedUser)
     //console.log('Adding note', note, userInfo)
   }
   

@@ -27,7 +27,7 @@ function Events(props) {
       });
     }
     timeOfDay()
-  }, [authState, oktaAuth, setUserInfo]); //FIXME: maybe remove setUserInfo
+  }, [authState, oktaAuth]); //FIXME: maybe remove setUserInfo
 
   async function sendLoginInfo(data){
     //console.log('Events page: ', data)

@@ -22,10 +22,10 @@ const userSchema = new Schema({
         allDay: Boolean
     }],
     notes: [{
-        id: {type: String, unique: true},
+        id: {type: String},
         title: String,
         description: String
-    }]
+    },]
 })
 
 const User = mongoose.model('User', userSchema)

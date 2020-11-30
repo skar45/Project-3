@@ -12,8 +12,15 @@ async function createUser(req, res) {
     req.body
   );
   // TODO: if statement to detemine if user already exists
-  //let dbRes = await db.User.find({})
-  let result = await db.User.create(req.body);
+  let dbRes = await db.User.find({email: req.body.email})
+  if (!(dbRes == false)) {
+    console.log('dbRes=', dbRes)
+    return
+  } else {
+    let result = await db.User.create(req.body);
+    console.log('New user added', result)
+  }
+  
 }
 
 // //PersonModel.update(
@@ -62,13 +69,20 @@ async function removeEvent(req, res) {
 
 async function addNote(req, res) {
   console.log(
-    "[usersController addEvent] function reached: req.body=",
+    "[usersController addnote] function reached: req.body=",
     req.body
   );
   //console.log(`[Update Note] Params: ${JSON.stringify(req.params)}, Body: ${JSON.stringify(req.body)}, new Data: ${JSON.stringify(req.body.event)}`)
   let result = await db.User.findOneAndUpdate(
-    { email: req.body.user },
-    { $push: { notes: req.body.notes } }
+    { email: req.body.user},
+    { $push: { notes: req.body.notes } },
+    function (error, success) {
+      if (error) {
+        console.log('ERROR!!!', error);
+      } else {
+        console.log(success);
+      }
+    }
   );
 }
 

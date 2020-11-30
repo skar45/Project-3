@@ -3,6 +3,7 @@ import API from '../utils/API'
 import moment from 'moment'
 
 function AllEvents(props){
+    const loggedUser = localStorage.getItem('user')
     const [events, setEvents] = useState([])
 
     useEffect(() => {
@@ -11,9 +12,10 @@ function AllEvents(props){
     
     async function getEvents(){
         let eventsData = await API.getInfo() 
-        console.log('props=', props.user.email)
-        let currentUserData = eventsData.data.filter(user => user.email === props.user.email)
+        console.log('props=', loggedUser)
+        let currentUserData = eventsData.data.filter(user => user.email === loggedUser)
         // console.log('getEvents home :', eventsData.data)
+        // TODO: error handling
         console.log('currentUserData=', currentUserData[0])
         setEvents(currentUserData[0].events)
     }

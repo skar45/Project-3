@@ -15,6 +15,7 @@ export default function CalendarMain() {
   const [eventList, setEventList] = useState([])
   const {userInfo, setUserInfo} = useContext(UserContext)
   const [userEmail, setUserEmail] = useState("")
+  const loggedUser = localStorage.getItem('user')
 
   useEffect(() => {
     getEvents()
@@ -64,19 +65,16 @@ export default function CalendarMain() {
       end: data.event.end,
       allDay: data.event.allDay
     }
-    let result = await API.addEvent(newEvent, userInfo)
+    let result = await API.addEvent(newEvent, loggedUser)
   }
 
   async function getEvents(){
     let result = await API.getInfo()
-    let currentUserData = result.data.filter(user => user.email === userInfo.email)
-    console.log('[currentUserData]:', currentUserData)
-    console.log('[userInfo]:', userInfo)
-    // if (result.data){
-    //   let currentUserData = result.data.filter(user => user.email === userInfo.email)
-      
-    //   setEventList(currentUserData[0].events)
-    // }
+    if (result.data){
+      let currentUserData = result.data.filter(user => user.email === loggedUser)
+      console.log('[currentUserData]:', result.data)
+      setEventList(currentUserData[0].events)
+    }
     
 
   }
