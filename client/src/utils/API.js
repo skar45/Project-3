@@ -9,8 +9,8 @@ export default {
     getInfo: function(){
         return axios.get("/api/users")
     },
-    updateEvent: function(eventData){
-        return axios.put("/api/events/" + eventData.event.id, eventData)
+    updateEvent: function(eventData, userData){
+        return axios.put("/api/events/" + eventData.event.id, {events: eventData, user: userData})
     },
     deleteEvent: function(id){
         return axios.delete("/api/events/" + id)

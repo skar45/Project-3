@@ -143,66 +143,75 @@ export default function FloatingActionButtonZoom() {
     },
   ];
   return (
-    <div className={classes.root} style={{}}>
-      
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="action tabs example"
+    <>
+      <div>
+          <h2>Instructions</h2>
+          <ul>
+            <li>Click on the '+' button to add items to the KanBan</li>
+            <li>Select the item to move it to the next tab</li>
+          </ul>
+      </div>
+      <div className={classes.root} style={{}}>
+        
+        <AppBar position="static" color="default">   
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+            aria-label="action tabs example"
+          >
+            <Tab label="To-Do" {...a11yProps(0)} />
+            <Tab label="Doing" {...a11yProps(1)} />
+            <Tab label="Done" {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={value}
+          onChangeIndex={handleChangeIndex}
         >
-          <Tab label="To-Do" {...a11yProps(0)} />
-          <Tab label="Doing" {...a11yProps(1)} />
-          <Tab label="Done" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          {todoInput.map(text=>{
-            return(<ListItem button onClick={()=>changeToDo(text)}>
-              {text} 
-              </ListItem>)
-            
-          })}
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          {doingInput.map(text=>{
-            return(<ListItem button onClick={()=>changeDoing(text)}>
-              {text} 
-              </ListItem>)
-            
-          })}
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-        {doneInput.map(text=>{
-            return(<ListItem button onClick={()=>changeDone(text)}>
-              {text} 
-              </ListItem>)
-            
-          })}
-        </TabPanel>
-      </SwipeableViews>
-      {fabs.map((fab, index) => (
-        <Zoom
-          key={fab.color}
-          in={value === 0}
-          timeout={transitionDuration}
-          style={{
-            transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,
-          }}
-          unmountOnExit
-        >
-          <Dialog label={fab.label} className={fab.className} color={fab.color} icon={fab.icon} func={setInput} val={todoInput}></Dialog>
-        </Zoom>
-      ))}
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            {todoInput.map(text=>{
+              return(<ListItem button onClick={()=>changeToDo(text)}>
+                {text} 
+                </ListItem>)
+              
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            {doingInput.map(text=>{
+              return(<ListItem button onClick={()=>changeDoing(text)}>
+                {text} 
+                </ListItem>)
+              
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+          {doneInput.map(text=>{
+              return(<ListItem button onClick={()=>changeDone(text)}>
+                {text} 
+                </ListItem>)
+              
+            })}
+          </TabPanel>
+        </SwipeableViews>
+        {fabs.map((fab, index) => (
+          <Zoom
+            key={fab.color}
+            in={value === 0}
+            timeout={transitionDuration}
+            style={{
+              transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,
+            }}
+            unmountOnExit
+          >
+            <Dialog label={fab.label} className={fab.className} color={fab.color} icon={fab.icon} func={setInput} val={todoInput}></Dialog>
+          </Zoom>
+        ))}
 
-    </div>
+      </div>
+    </>
   );
 }

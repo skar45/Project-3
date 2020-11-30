@@ -73,14 +73,17 @@ export default function CalendarMain() {
     if (result.data){
       let currentUserData = result.data.filter(user => user.email === loggedUser)
       console.log('[currentUserData]:', result.data)
-      setEventList(currentUserData[0].events)
+      if (currentUserData[0].events){
+        setEventList(currentUserData[0].events)
+      }
+      
     }
     
 
   }
 
   async function updateEvent(data){
-    let result = await API.updateEvent(data)
+    let result = await API.updateEvent(data, loggedUser)
   }
 
   async function deleteEvent(data){
@@ -90,7 +93,6 @@ export default function CalendarMain() {
   return (
     <div className="App">
       <div className="container">
-        <pre>{JSON.stringify(userInfo)}</pre>
         <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -138,12 +140,6 @@ function RenderSidebar(props) {
         <label>
           <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} /> Toggle Weekends
         </label>
-      </div>
-      <div>
-        <h2>All Events ({props.currentEvents.length})</h2>
-        <ul>
-          {props.currentEvents.map(renderSidebarEvent)}
-        </ul>
       </div>
     </div>
   );

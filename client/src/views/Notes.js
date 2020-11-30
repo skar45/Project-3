@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import EditNote from "./EditNote";
 //import noteReducer from ".. /reducers/noteReducer";
 class Note extends Component {
+  
+
   render() {
     const notes = this.props.notes.map((note) => {
       return (
