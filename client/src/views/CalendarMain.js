@@ -90,7 +90,6 @@ export default function CalendarMain() {
   return (
     <div className="App">
       <div className="container">
-        <pre>{JSON.stringify(userInfo)}</pre>
         <RenderSidebar handleWeekendsToggle={handleWeekendsToggle} weekendsVisible={weekendsVisible} currentEvents={currentEvents}/>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -138,12 +137,6 @@ function RenderSidebar(props) {
         <label>
           <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} /> Toggle Weekends
         </label>
-      </div>
-      <div>
-        <h2>All Events ({props.currentEvents.length})</h2>
-        <ul>
-          {props.currentEvents.map(renderSidebarEvent)}
-        </ul>
       </div>
     </div>
   );

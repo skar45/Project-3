@@ -2,7 +2,7 @@ const db = require("../models");
 
 async function findAll(req, res) {
   let result = await db.User.find();
-  console.log("Retrieved from the Database(user): ", result);
+  console.log("Retrieved from the Database: ", result);
   res.json(result);
 }
 
@@ -41,7 +41,7 @@ async function addEvent(req, res) {
       if (error) {
         console.log('ERROR!!!', error);
       } else {
-        console.log(success);
+        console.log('Successfully added event:', success);
       }
     }
   );
@@ -53,10 +53,12 @@ async function updateEvent(req, res) {
       req.body
     )}, new Data: ${JSON.stringify(req.body.event)}`
   );
-  let result = await db.User.findOneAndUpdate(
-    { events: { id: req.params.id } },
-    { events: req.body.event }
-  );
+  let result = await db.User.find({ events: { id: req.params.id }} )
+  console.log('[updateEvent] function result=', result)
+  // let result = await db.User.findOneAndUpdate(
+  //   { events: { id: req.params.id } },
+  //   { events: req.body.event }
+  // );
 }
 
 async function removeEvent(req, res) {
@@ -80,7 +82,7 @@ async function addNote(req, res) {
       if (error) {
         console.log('ERROR!!!', error);
       } else {
-        console.log(success);
+        console.log('Successfully added note:', success);
       }
     }
   );
