@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+//import { useHistory } from "react-router-dom";
 class EditNote extends Component {
+  // let history = useHistory();
   constructor(props) {
     super(props);
     this.state = {
       title: "",
       message: "",
+      id: "",
     };
   }
   handleUpdate = (e) => {
@@ -18,20 +21,22 @@ class EditNote extends Component {
     };
     this.props.dispatch({
       type: "UPDATE_NOTE",
-      id: this.props.note.id,
+      id: this.props.notes.id,
       data: data,
     });
+    
   };
   render() {
     //map through redux state and find note with editing true. return that note
+ 
     return (
-      <div key={this.props.note.id} className="note">
+      <div key={this.props.notes.id} className="note">
         <form className="form" onSubmit={this.handleUpdate}>
           <input
             required
             type="text"
             ref={(input) => (this.getTitle = input)}
-            defaultValue={this.props.note.title}
+            //defaultValue={this.props.notes.title}
             placeholder="Enter Note Title"
           />
           <br />
@@ -41,7 +46,7 @@ class EditNote extends Component {
             rows="5"
             cols="28"
             ref={(input) => (this.getMessage = input)}
-            defaultValue={this.props.note.message}
+            //defaultValue={this.props.notes.message}
             placeholder="Enter Note"
           />
           <br />
@@ -50,6 +55,12 @@ class EditNote extends Component {
         </form>
       </div>
     );
+ 
   }
 }
-export default connect()(EditNote);
+const mapStateToProps = (state) => {
+  return {
+    notes: state,
+  };
+};
+export default connect(mapStateToProps)(EditNote);

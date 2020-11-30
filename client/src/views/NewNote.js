@@ -70,4 +70,9 @@ class NewNote extends Component {
     );
   }
 }
-export default connect()(NewNote);
+const mapStateToProps = (state) => {
+  return {
+    notes: state,
+  };
+};
+export default connect(mapStateToProps)(NewNote);
