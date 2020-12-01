@@ -39,7 +39,7 @@ export default function AllEvents(props){
       const result = await fetch('http://localhost:3000/api/twilio',{method:'POST', headers:{'Content-Type': 'application/json'},body:JSON.stringify({message: msg, number:'6478638146'})})
     }
 
-    function options(event){
+    function sendMail(event){
       axios({
         method: "POST",
         url: "https://api.sendgrid.com/v3/mail/send",
@@ -68,8 +68,7 @@ export default function AllEvents(props){
           json: true,
       })
   };
-  
-  options()
+
 
     return (
         <section>
