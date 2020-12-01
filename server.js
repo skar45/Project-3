@@ -54,12 +54,16 @@ app.post("/api/twilio", (req, res) => {
    console.log('sending message')
    client.messages
   .create({
-     body: req.body.message || 'hello world',
+     body: req.body.message,
      from: '+12056221692',
-     to: '+1' + req.body.number || '6478638146'
+     to: '+1' + req.body.number
    })
   .then(message => res.send(message.sid));
- });
+});
+
+app.get("*", (req, res) => {
+   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 
 app.listen(PORT, () => {
