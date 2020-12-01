@@ -19,6 +19,7 @@ export default function CalendarMain() {
 
   useEffect(() => {
     getEvents()
+    console.log('effECTing!!')
   }, [])
 
   function handleWeekendsToggle() {
@@ -69,15 +70,19 @@ export default function CalendarMain() {
   }
 
   async function getEvents(){
+    console.log('[getEvents] says hello')
     let result = await API.getInfo()
-    if (result.data){
       let currentUserData = result.data.filter(user => user.email === loggedUser)
       console.log('[currentUserData]:', result.data)
-      if (currentUserData[0].events){
-        setEventList(currentUserData[0].events)
-      }
+
+      Array.from(...new Set(currentUserData[0].events))
+      console.log('[currentUserData]:', currentUserData)
+
+      // if (currentUserData[0].events !== undefined){
+      //   setEventList(currentUserData[0].events)
+      // }
       
-    }
+    
     
 
   }
