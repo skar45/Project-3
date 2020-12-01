@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import API from '../utils/API'
 import moment from 'moment'
 
-function AllEvents(props){
+export default function AllEvents(props){
     const loggedUser = localStorage.getItem('user')
     const [events, setEvents] = useState([])
 
@@ -15,9 +15,9 @@ function AllEvents(props){
         console.log('props=', loggedUser)
         let currentUserData = eventsData.data.filter(user => user.email === loggedUser)
         console.log('currentUserData =', currentUserData)
-        if (currentUserData !== 0){
-            console.log('currentUserData=', currentUserData[0])
-            console.log('Prepare to set events', currentUserData[0].events)
+        if (currentUserData[0]){
+            //console.log('currentUserData=', currentUserData[0])
+            //console.log('Prepare to set events', currentUserData[0].events)
             setEvents(currentUserData[0].events)
         } else{
             console.log('No currentUserData')
@@ -33,7 +33,7 @@ function AllEvents(props){
         console.log('date', dateComponent);
         console.log('time', timeComponent);
         return dateComponent + ' ' + timeComponent
-
+    }
     async function twilioReq(msg,time){
       const result = await fetch('http://localhost:3000/api/twilio',{method:'POST', headers:{'Content-Type': 'application/json'},body:JSON.stringify({message: msg, number:'6478638146'})})
     }
@@ -68,5 +68,3 @@ function AllEvents(props){
        </section>
     )
 }
-
-export default AllEvents

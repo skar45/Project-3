@@ -24,21 +24,25 @@ async function createUser(req, res) {
 }
 
 async function addEvent(req, res) {
+  const hacksolution = await db.User.find();
+  console.log('hack solution: ', JSON.parse(JSON.stringify(hacksolution))[0].events)
+  const events = JSON.parse(JSON.stringify(hacksolution))[0].events
   console.log(
     "[usersController addEvent] function reached: req.body=",
-    req.body
+    req.body.events
   );
   let result = await db.User.findOneAndUpdate(
     { email: req.body.user },
-    { $push: { events: req.body.events } },
+    { events: [...events,req.body.events] } ,
     function (error, success) {
       if (error) {
         console.log('ERROR!!!', error);
       } else {
-        console.log('Successfully added event:', success);
+        console.log('Successfully added event');
       }
     }
   );
+  console.log('addEvent: ', result)
 }
 
 async function updateEvent(req, res) {

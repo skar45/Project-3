@@ -58,6 +58,7 @@ export default function CalendarMain() {
   }
 
   async function addEvents(data){
+    
     let newEvent = {
       id: data.event.id,
       title: data.event.title,
@@ -73,9 +74,8 @@ export default function CalendarMain() {
     if (result.data){
       let currentUserData = result.data.filter(user => user.email === loggedUser)
       console.log('[currentUserData]:', result.data)
-      if (currentUserData[0].events){
-        setEventList(currentUserData[0].events)
-      }
+      currentUserData[0]?setEventList(currentUserData[0].events):setEventList([])
+    
       
     }
     

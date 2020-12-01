@@ -4,6 +4,7 @@ import axios from 'axios'
 export default {
     addEvent: function(eventData, userData){
         //console.log('API add event retrieved data: ', eventData, userData.email)
+        console.log('called twice')
         return axios.post("/api/events", {events: eventData, user: userData})
     },
     getInfo: function(){

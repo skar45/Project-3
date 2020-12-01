@@ -15,7 +15,7 @@ const userSchema = new Schema({
     family_name: String,
     email: {type: String, unique: true},
     events: [{
-        id: {type: String, unique: true},
+        id: {type: String},
         title: String,
         start: Date,
         end: Date,
