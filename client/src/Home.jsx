@@ -30,6 +30,7 @@ const Home = () => {
   }
  
   if(!authState.isAuthenticated) {
+    localStorage.clear()
     return (
       <div className="container-fluid loginContainer">
         <div className="logo-container">
@@ -42,7 +43,10 @@ const Home = () => {
       </div>
     );
   }
- 
+  oktaAuth.getUser().then((info) => {
+    localStorage.setItem('user', info.email)
+  });
+  
   return (
     <div className="container-fluid loginContainer">
       <div className="logo-container">

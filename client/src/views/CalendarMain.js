@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
+//import { INITIAL_EVENTS, createEventId } from "../utils/event-utils";
 import API from '../utils/API'
+import {UserContext} from '../UserContext'
+import { v4 as uuidv4 } from 'uuid'
 
 
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
   const [eventList, setEventList] = useState([])
+  const {userInfo, setUserInfo} = useContext(UserContext)
+  const [userEmail, setUserEmail] = useState("")
+  const loggedUser = localStorage.getItem('user')
 
   useEffect(() => {
     getEvents()
@@ -28,7 +33,7 @@ export default function CalendarMain() {
 
     if (title) {
       calendarApi.addEvent({
-        id: createEventId(),
+        id: uuidv4(),
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
@@ -53,6 +58,7 @@ export default function CalendarMain() {
   }
 
   async function addEvents(data){
+    
     let newEvent = {
       id: data.event.id,
       title: data.event.title,
@@ -60,20 +66,24 @@ export default function CalendarMain() {
       end: data.event.end,
       allDay: data.event.allDay
     }
-    // console.log(data)
-    let result = await API.addEvent(newEvent)
+    let result = await API.addEvent(newEvent, loggedUser)
   }
 
-  // TODO: send to utils
   async function getEvents(){
-    //console.log('Hello')
-    let result = await API.getEvents()
-    console.log('[getEvents]:', result.data)
-    setEventList(result.data)
+    let result = await API.getInfo()
+    if (result.data){
+      let currentUserData = result.data.filter(user => user.email === loggedUser)
+      console.log('[currentUserData]:', result.data)
+      currentUserData[0]?setEventList(currentUserData[0].events):setEventList([])
+    
+      
+    }
+    
+
   }
 
   async function updateEvent(data){
-    let result = await API.updateEvent(data)
+    let result = await API.updateEvent(data, loggedUser)
   }
 
   async function deleteEvent(data){
@@ -130,12 +140,6 @@ function RenderSidebar(props) {
         <label>
           <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} /> Toggle Weekends
         </label>
-      </div>
-      <div>
-        <h2>All Events ({props.currentEvents.length})</h2>
-        <ul>
-          {props.currentEvents.map(renderSidebarEvent)}
-        </ul>
       </div>
     </div>
   );

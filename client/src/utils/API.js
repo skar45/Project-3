@@ -2,24 +2,26 @@
 import axios from 'axios'
 
 export default {
-    addEvent: function(eventData){
-        //console.log('API add event retrieved data: ', eventData)
-        return axios.post("/api/events", eventData)
+    addEvent: function(eventData, userData){
+        //console.log('API add event retrieved data: ', eventData, userData.email)
+        console.log('called twice')
+        return axios.post("/api/events", {events: eventData, user: userData})
     },
-    getEvents: function(){
-        return axios.get("/api/events")
+    getInfo: function(){
+        return axios.get("/api/users")
     },
-    updateEvent: function(eventData){
-        return axios.put("/api/events/" + eventData.event.id, eventData)
+    updateEvent: function(eventData, userData){
+        return axios.put("/api/events/" + eventData.event.id, {events: eventData, user: userData})
     },
     deleteEvent: function(id){
         return axios.delete("/api/events/" + id)
     },
-    saveNote: function(noteData){
-        console.log('api data: ', noteData)
-        return axios.post("/api/notes", noteData)
+    saveNote: function(noteData, userData){
+        //console.log('api data: ', noteData)
+        return axios.post("/api/notes", {notes: noteData, user: userData} )
     },
-    getNotes: function(){
-        return axios.get("/api/notes")
+    addUser: function(userData){
+        //console.log('API user data received: ', userData)
+        return axios.post("/api/users", userData)
     }
 }
