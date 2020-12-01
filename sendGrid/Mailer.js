@@ -1,11 +1,9 @@
-//const request = require("request");
-//import API from '../client/src/utils/API'
 const axios = require('axios')
 
 const obj = {
-    email: "daileykaze@gmail.com",
-    firstName: "Dailey",
-    lastName: "Kaze",
+    email: "kelsey.bathurst@gmail.com",
+    firstName: "Kelsey",
+    lastName: "Whatever your last name is",
     title: "Presentations",
     start: "2020-12-01 10:30",
     end: "2020-12-01 14:30"
@@ -20,12 +18,12 @@ const options = () => {
         authorization:
         "Bearer " + process.env.SENDGRID_API_KEY,
         },
-        body: {
+        data: {
             personalizations: [
                 {
                 to: [{ email: obj.email, name: (obj.firstName + ' ' + obj.lastName) }],
                 dynamic_template_data: {
-                firstName: obj.firstName,
+                given_name: obj.firstName,
                 title: obj.title,
                 start: obj.start,
                 end: obj.end,
@@ -42,8 +40,3 @@ const options = () => {
 };
 
 options()
-// request(options, function (error, response, body) {
-//   if (error) throw new Error(error);
-
-//   console.log(body);
-// });
