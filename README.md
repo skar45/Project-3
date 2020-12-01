@@ -1,10 +1,17 @@
-# Create React Expreeess App
+# React Calendar App
 
-## About This Boilerplate
+* Producky is an application that can improve your productivity. The users will have their own personal profile after logged in. They can schedule or view events, add or delete notes and create kanban todo lists as well as send reminder emails for their events
+* Deployed at : https://sleepy-retreat-90049.herokuapp.com/Events
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
-
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+## Tech
+* Okta Authentication
+* React-Swipeable-View
+* Redux
+* Material UI
+* HTML/CSS
+* fullCalendar
+* Bootstrap
+* Mongoose/Mongodb
 
 ## Starting the app locally
 
@@ -22,8 +29,17 @@ After both installations complete, run the following command in your terminal:
 npm start
 ```
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+Your app should now be running on. The Express server should intercept any AJAX requests from the client.
+## Screenshot
+* Home
+![alt text](./Desk.png)
+* Email reminder
+![alt text](email.png)
+## You may need to add Redux dev tool for the browser 
+## Road Map
+Naturally, Producky is a forward thinking business that is constantly evolving to meet the needs of our users. To do this in the future we would like to :
+* Twilio => Send alerts and reminders by SMS
+* Dark Mode => Reduce eye-strain for night owls (or ducks)
+* Image uploads => Bring imagery to notes
+* Share functionality or Slack integration => Send events and notes to team members or colleagues
 
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
