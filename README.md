@@ -11,6 +11,7 @@
 * HTML/CSS
 * fullCalendar
 * Bootstrap
+* Mongoose/Mongodb
 
 ## Starting the app locally
 
