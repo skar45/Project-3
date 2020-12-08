@@ -40,7 +40,7 @@ export default function AllEvents(props){
     }
 
     function sendMail(event){
-      axios({
+      let result = axios({
         method: "POST",
         url: "https://api.sendgrid.com/v3/mail/send",
         headers: {
@@ -67,7 +67,8 @@ export default function AllEvents(props){
           },
           json: true,
       })
-  };
+      console.log(result)
+    };
 
 
     return (
@@ -78,7 +79,7 @@ export default function AllEvents(props){
                 return(
                   <div className="card text-center rounded-lg">
                     <div className="card-header">
-                      Start: {convertISO(event.start)}
+                      Start: {event.start} 
                     </div>
                     <div className="card-body">
                       <h5 className="card-title">{event.title}</h5>
@@ -88,12 +89,13 @@ export default function AllEvents(props){
 
                     </div>
                     <div className="card-footer text-muted">
-                      End: {convertISO(event.end)}
+                      End: {event.end} 
                     </div>
                   </div>
                 )
               })
-            : <h4>No Results to Display</h4>
+            : <><h4>You have no events 😔</h4>
+              <h5>Visit the Calendar to add new events!</h5></>
             }
             </ul>
             
