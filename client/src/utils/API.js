@@ -14,7 +14,7 @@ export default {
         return axios.put("/api/events/" + eventData.event.id, {events: eventData, user: userData})
     },
     deleteEvent: function(id, userData){
-        return axios.delete("/api/events/" + id, userData)
+        return axios.delete("/api/events/" + id, { data: userData })
     },
     saveNote: function(noteData, userData){
         //console.log('api data: ', noteData)
