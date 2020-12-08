@@ -45,30 +45,31 @@ function App() {
             <UserContext.Provider value={{userInfo, setUserInfo}}>
               <Route path="/" exact component={Home} />
               <Route path="/login/callback" component={LoginCallback} />
-              <SecureRoute exact path="/CalendarMain">
+              {/* TODO: Remember to return to SecureRoute */}
+              <Route exact path="/CalendarMain">
                 <CalendarMain />
-              </SecureRoute>
-              <SecureRoute path="/NewNote">
+              </Route>
+              <Route path="/NewNote">
                 <NewNote />
-              </SecureRoute>
-              <SecureRoute path="/Notes">
+              </Route>
+              <Route path="/Notes">
                 <Note />
-              </SecureRoute>
-              <SecureRoute path="/NoteList">
+              </Route>
+              <Route path="/NoteList">
                 <NoteList />
-              </SecureRoute>
-              <SecureRoute path="/NoteCount">
+              </Route>
+              <Route path="/NoteCount">
                 <NoteCounter />
-              </SecureRoute>
-              <SecureRoute path="/EditNote">
+              </Route>
+              <Route path="/EditNote">
                 <EditNote />
-              </SecureRoute>
-              <SecureRoute path='/Events'>
+              </Route>
+              <Route path='/Events'>
                 <Events />
-              </SecureRoute>
-              <SecureRoute path='/Kanban'>
+              </Route>
+              <Route path='/Kanban'>
                   <Kanban />
-              </SecureRoute>
+              </Route>
             </UserContext.Provider>
           </Switch>
         </div>
