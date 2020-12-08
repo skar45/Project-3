@@ -53,11 +53,8 @@ async function updateEvent(req, res) {
 
 async function removeEvent(req, res) {
   console.log(`Deleting item id: ${req.params.id} from the database. req.body=`, req.body);
-  // let result = await db.User.findOneAndDelete({
-  //   'events.id': { id: req.params.id },
-  // });
 
-  let result = await db.User.updateOne({'event.id': req.params.id}, {$pull: {events: {id: req.params.id}}}, {safe: true, multi: true}, function(err, obj){
+  let result = await db.User.updateOne({'event.id': req.params.id}, {$unset: {events: {id: req.params.id}}}, {safe: true, multi: true}, function(err, obj){
     if (err){
       console.log('ERROR!!!', err)
     } else{
@@ -67,9 +64,6 @@ async function removeEvent(req, res) {
   res.send({ message: "Deleted Item" });
 }
 
-// Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}, { safe: true, multi:true }, function(err, obj) {
-//   //do something smart
-// });
 
 async function addNote(req, res) {
   console.log(
