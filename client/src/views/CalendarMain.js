@@ -21,6 +21,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 export default function CalendarMain() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
@@ -129,7 +133,7 @@ export default function CalendarMain() {
   }
 
   async function deleteEvent(data){
-    let result = await API.deleteEvent(data.event.id)
+    let result = await API.deleteEvent(data.event.id, loggedUser)
   }
 
   return (
@@ -156,9 +160,9 @@ export default function CalendarMain() {
             <h2 id="transition-modal-title">Add a title for your event</h2>
             <div id="transition-modal-description">
                 <div className="mb-3" >
-                  <input onChange={handleInputChange} type="title" class="form-control" id="exampleFormControlInput1" placeholder="Title" />
+                  <input onChange={handleInputChange} type="title" className="form-control" id="exampleFormControlInput1" placeholder="Title" />
                 </div>
-                <div class="form-check form-switch">
+                <div className="form-check form-switch">
                   <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" defaultChecked/>
                   <label className="form-check-label" for="flexSwitchCheckChecked">All Day</label>
                   <button className="btn btn-primary float-right" type="submit" onClick={() => {handleClose(); handleDateSelect()} }> Add to Calendar</button>
@@ -249,6 +253,11 @@ function PaperComponent(props) {
 }
 
 function RenderSidebar(props) {
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+  });
+
   return (
     <div>
       <div>
@@ -256,14 +265,22 @@ function RenderSidebar(props) {
         <ul>
           <li>Select dates and you will be prompted to create a new event</li>
           <li>Drag, drop, and resize events</li>
-          <li>Double-click an event to delete it</li>
+          <li>Click on an event to delete it</li>
         </ul>
       </div>
       <div>
-        {/* FIXME:  change checkbox to switch */}
-        <label>
-          <input type="checkbox" checked={props.weekendsVisible} onChange={props.handleWeekendsToggle} /> Toggle Weekends
-        </label>
+        {/* Switch to toggle weekends */}
+        <FormControlLabel
+        control={
+          <Switch
+            checked={props.weekendsVisible}
+            onChange={props.handleWeekendsToggle}
+            name="checkedB"
+            color="primary"
+          />
+        }
+        label="Toggle Weekends"
+      />
       </div>
     </div>
   );
@@ -277,17 +294,3 @@ function renderEventContent(eventInfo) {
     </>
   );
 }
-
-// function renderSidebarEvent(event) {
-//   return (
-//     <li key={event.id}>
-//       <b>
-//         {formatDate(event.start, {
-//           year: "numeric",
-//           month: "short",
-//           day: "numeric",
-//         })}
-//       </b>
-//     </li>
-//   );
-// }

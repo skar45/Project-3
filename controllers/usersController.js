@@ -14,7 +14,7 @@ async function createUser(req, res) {
   //if statement to detemine if user already exists
   let dbRes = await db.User.find({email: req.body.email})
   if (!(dbRes == false)) {
-    console.log('dbRes=', dbRes)
+    console.log('Current user found! =>', dbRes)
     return
   } else {
     let result = await db.User.create(req.body);
@@ -45,28 +45,25 @@ async function addEvent(req, res) {
   console.log('addEvent: ', result)
 }
 
-async function updateEvent(req, res) {
-  console.log(
-    `Params: ${JSON.stringify(req.params)}, Body: ${JSON.stringify(
-      req.body
-    )}, new Data: ${JSON.stringify(req.body.events.event)}`
-  );
-  let result = await db.User.find({events:(req.body.event)})
-
+async function updateEvent(req, res) {  
+  console.log(`New data for event with id ${req.params.id}, ${req.body.events.oldEvent.title} = ${JSON.stringify(req.body.events.event)}`)
+  let result = await db.User.findOneAndUpdate({'events.id':req.params.id}, {$set: {'events.$': req.body.events.event}})
   console.log('[updateEvent] function result=', result)
-  // let result = await db.User.findOneAndUpdate(
-  //   { User: {events: { id: req.params.id }} },
-  //   { events: req.body.event }
-  // );
 }
 
 async function removeEvent(req, res) {
-  console.log(`Deleting item id: ${req.params.id} from the database`);
-  let result = await db.User.findByIdAndDelete({
-    events: { id: req.params.id },
-  });
+  console.log(`Deleting item id: ${req.params.id} from the database. req.body=`, req.body);
+
+  let result = await db.User.updateOne({'event.id': req.params.id}, {$unset: {events: {id: req.params.id}}}, {safe: true, multi: true}, function(err, obj){
+    if (err){
+      console.log('ERROR!!!', err)
+    } else{
+      console.log('SUCCESSFULLY deleted item', obj)
+    }
+  })
   res.send({ message: "Deleted Item" });
 }
+
 
 async function addNote(req, res) {
   console.log(

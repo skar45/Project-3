@@ -13,8 +13,17 @@ export default {
     updateEvent: function(eventData, userData){
         return axios.put("/api/events/" + eventData.event.id, {events: eventData, user: userData})
     },
-    deleteEvent: function(id){
-        return axios.delete("/api/events/" + id)
+    deleteEvent: async function(id, userData){
+       // return axios.delete("/api/events/" + id, { data: userData })
+        const response = await fetch('/api/events/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+
+        return response
+
     },
     saveNote: function(noteData, userData){
         //console.log('api data: ', noteData)

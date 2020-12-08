@@ -11,6 +11,6 @@ export default {
     disableHttpsCheck: true,
   },
   resourceServer: {
-    messagesUrl: 'https://sleepy-retreat-90049.herokuapp.com/api/messages',
+    messagesUrl:  'http://localhost:8080/api/messages', //'https://sleepy-retreat-90049.herokuapp.com/api/messages',
   },
 };
