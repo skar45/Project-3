@@ -54,7 +54,7 @@ export default function AllEvents(props){
                 return(
                   <div className="card text-center rounded-lg">
                     <div className="card-header">
-                      Start: {event.start} 
+                      Start: {convertISO(event.start)} 
                     </div>
                     <div className="card-body">
                       <h5 className="card-title">{event.title}</h5>
@@ -64,7 +64,7 @@ export default function AllEvents(props){
 
                     </div>
                     <div className="card-footer text-muted">
-                      End: {event.end} 
+                      End: {convertISO(event.end)} 
                     </div>
                   </div>
                 )

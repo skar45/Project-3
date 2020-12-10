@@ -25,6 +25,9 @@ export default {
     saveNote: function(noteData, userData){
         return axios.post("/api/notes", {notes: noteData, user: userData} )
     },
+    deleteNote: function(id){
+        return axios.delete("/api/notes/" + id)
+    },
     getInfo: function(){
         return axios.get("/api/users")
     },

@@ -31,7 +31,7 @@ class NewNote extends Component {
     const data = {
       id: uuidv4(),
       title: this.getTitle.value,
-      message: this.getMessage.value,
+      description: this.getMessage.value,
       editing: false,
     };
     this.props.dispatch({
