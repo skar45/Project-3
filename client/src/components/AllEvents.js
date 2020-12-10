@@ -85,7 +85,7 @@ export default function AllEvents(props){
                       <h5 className="card-title">{event.title}</h5>
                       <p className="card-text"></p>
                       <a href="/CalendarMain" className="btn btn-primary">View in Calendar</a>
-                      <a href="#" className="btn btn-primary" onClick={()=>sendMail(event)}>Set Reminder</a>
+                      <button className="btn btn-primary" onClick={()=>sendMail(event)}>Set Reminder</button>
 
                     </div>
                     <div className="card-footer text-muted">

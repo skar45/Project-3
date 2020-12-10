@@ -54,7 +54,7 @@ async function updateEvent(req, res) {
 async function removeEvent(req, res) {
   console.log(`Deleting item id: ${req.params.id} from the database. req.body=`, req.body);
 
-  let result = await db.User.updateOne({'event.id': req.params.id}, {$unset: {events: {id: req.params.id}}}, {safe: true, multi: true}, function(err, obj){
+  let result = await db.User.findOneAndRemove({'event.id': req.params.id}, {$pull: {events: {id: req.params.id}}}, function(err, obj){
     if (err){
       console.log('ERROR!!!', err)
     } else{
@@ -66,29 +66,27 @@ async function removeEvent(req, res) {
 
 
 async function addNote(req, res) {
+  const hacksolution = await db.User.find({});
+  console.log('hack solution: ', JSON.parse(JSON.stringify(hacksolution))[0].notes)
+  const notes = JSON.parse(JSON.stringify(hacksolution))[0].notes
   console.log(
-    "[usersController addnote] function reached: req.body=",
-    req.body
+    "[usersController addNote] function reached: req.body.notes=",
+    req.body.notes
   );
-  //console.log(`[Update Note] Params: ${JSON.stringify(req.params)}, Body: ${JSON.stringify(req.body)}, new Data: ${JSON.stringify(req.body.event)}`)
   let result = await db.User.findOneAndUpdate(
-    { email: req.body.user},
-    { $push: { notes: req.body.notes } },
+    { email: req.body.user },
+    { notes: [...notes,req.body.notes] } ,
     function (error, success) {
       if (error) {
         console.log('ERROR!!!', error);
       } else {
-        console.log('Successfully added note:', success);
+        console.log('Successfully added note');
       }
     }
   );
+  console.log('addNote: ', result)
 }
 
-// async function remove(req, res){
-//     console.log(`Deleting item id: ${req.params.id} from the database`)
-//     let result = await db.User.findByIdAndDelete({events:{id: req.params.id}})
-//     res.send({message: "Deleted Item"})
-// }
 
 module.exports = {
   findAll,
