@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const nodemailer = require("nodemailer")
+require('dotenv').config()
 //const emailHTML = require("../../email")
 
 router.post('/', function (req, res){
@@ -322,8 +323,8 @@ router.post('/', function (req, res){
         let transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: "teamproducky@gmail.com",
-                pass: "duckoff!"
+                user: process.env.USER_EMAIL,
+                pass: process.env.USER_PASS
             }
         });
 
