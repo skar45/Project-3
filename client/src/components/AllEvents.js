@@ -6,6 +6,7 @@ import axios from 'axios'
 export default function AllEvents(props){
     const loggedUser = localStorage.getItem('user')
     const [events, setEvents] = useState([])
+    const [user, setUser] = useState({})
 
     useEffect(() => {
         getEvents()
@@ -19,6 +20,7 @@ export default function AllEvents(props){
         if (currentUserData[0]){
             //console.log('currentUserData=', currentUserData[0])
             //console.log('Prepare to set events', currentUserData[0].events)
+            setUser(currentUserData[0])
             setEvents(currentUserData[0].events)
         } else{
             console.log('No currentUserData')
@@ -39,37 +41,10 @@ export default function AllEvents(props){
       const result = await fetch('http://localhost:3000/api/twilio',{method:'POST', headers:{'Content-Type': 'application/json'},body:JSON.stringify({message: msg, number:'6478638146'})})
     }
 
-    function sendMail(event){
-      let result = axios({
-        method: "POST",
-        url: "https://api.sendgrid.com/v3/mail/send",
-        headers: {
-          "content-type": "application/json",
-          authorization:
-          "Bearer " + process.env.SENDGRID_API_KEY,
-          },
-          data: {
-              personalizations: [
-                  {
-                  to: [{ email: props.user.email, name: (props.user.given_name + ' ' + props.user.family_name) }],
-                  dynamic_template_data: {
-                  given_name: props.user.given_name,
-                  title: event.title,
-                  start: event.start,
-                  end: event.end,
-                  },
-                  subject: "Reminder!",
-                  },
-              ],
-              from: { email: "teamproducky@gmail.com", name: "Producky Team" },
-              reply_to: { email: "teamproducky@gmail.com", name: "Producky Team" },
-              template_id: "d-587a743d18654942b4d54c1e45def243",
-          },
-          json: true,
-      })
-      console.log(result)
-    };
-
+    async function sendMail(user, eventData){
+      //console.log(eventData)
+      let result = await API.sendReminder(user, eventData)
+    }
 
     return (
         <section>
@@ -85,7 +60,7 @@ export default function AllEvents(props){
                       <h5 className="card-title">{event.title}</h5>
                       <p className="card-text"></p>
                       <a href="/CalendarMain" className="btn btn-primary">View in Calendar</a>
-                      <button className="btn btn-primary" onClick={()=>sendMail(event)}>Set Reminder</button>
+                      <button className="btn btn-primary" onClick={()=>sendMail(user, event)}>Set Reminder</button>
 
                     </div>
                     <div className="card-footer text-muted">

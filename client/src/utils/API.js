@@ -31,5 +31,8 @@ export default {
     addUser: function(userData){
         //console.log('API user data received: ', userData)
         return axios.post("/api/users", userData)
+    },
+    sendReminder: function(user, eventData){
+        return axios.post("/api/reminder", {user: user, events: eventData})
     }
 }
