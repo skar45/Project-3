@@ -58,7 +58,7 @@ async function removeEvent(req, res) {
     if (err){
       console.log('ERROR!!!', err)
     } else{
-      console.log('SUCCESSFULLY deleted item', obj)
+      console.log('SUCCESSFULLY deleted event', obj)
     }
   })
   res.send({ message: "Deleted Item" });
@@ -87,6 +87,19 @@ async function addNote(req, res) {
   console.log('addNote: ', result)
 }
 
+async function removeNote(req, res){
+  console.log(`Deleting item id: ${req.params.id} from the database. req.body=`, req.body);
+
+  let result = await db.User.findOneAndRemove({'note.id': req.params.id}, {$pull: {notes: {id: req.params.id}}}, function(err, obj){
+    if (err){
+      console.log('ERROR!!!', err)
+    } else{
+      console.log('SUCCESSFULLY deleted note', obj)
+    }
+  })
+  res.send({ message: "Deleted Item" });
+}
+
 
 module.exports = {
   findAll,
@@ -95,4 +108,5 @@ module.exports = {
   updateEvent,
   removeEvent,
   addNote,
+  removeNote
 };

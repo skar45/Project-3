@@ -4,11 +4,11 @@ const usersController = require('../../controllers/usersController')
 router.route("/")
     .get(usersController.findAll)
     .post(usersController.addNote)
-    //.put(usersController.updateNote)
 
-// router
-//     .route("/:id")
-//     .put(notesController.update)
-//     .delete(notesController.remove)
+
+router
+    .route("/:id")
+    //.put(usersController.update)
+    .delete(usersController.removeNote)
 
 module.exports = router

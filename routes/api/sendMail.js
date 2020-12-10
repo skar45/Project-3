@@ -1,7 +1,6 @@
 const router = require("express").Router()
 const nodemailer = require("nodemailer")
 require('dotenv').config()
-//const emailHTML = require("../../email")
 
 router.post('/', function (req, res){
     console.log('req.body=',req.body)
@@ -224,7 +223,7 @@ router.post('/', function (req, res){
               <tr>
                 <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit">Hi ${req.body.user.given_name}, You've subscribed to receive alerts from Producky.&nbsp;</div>
         <div style="font-family: inherit; text-align: inherit"><br></div>
-        <div style="font-family: inherit; text-align: inherit">Reminder: ${req.body.events.title} at ${req.body.events.start} to ${req.body.events.end}</div><div></div></div></td>
+        <div style="font-family: inherit; text-align: inherit">Reminder: ${req.body.events.title} at ${convertISO(req.body.events.start)} to ${convertISO(req.body.events.end)}</div><div></div></div></td>
               </tr>
             </tbody>
           </table><table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed" width="100%" data-start-index="20423" data-end-index="20587" data-muid="j8QRNdhMon1MUHVhKEeEcN"><tbody data-start-index="20587" data-end-index="20594"><tr data-start-index="20594" data-end-index="20598"><td align="center" bgcolor="#e4f1f2" class="outer-td" style="padding:15px 10px 0px 0px; background-color:#e4f1f2;" data-start-index="20598" data-end-index="20711"><table border="0" cellpadding="0" cellspacing="0" class="button-css__deep-table___2OZyb wrapper-mobile" style="text-align:center" data-start-index="20711" data-end-index="20841"><tbody data-start-index="20841" data-end-index="20848"><tr data-start-index="20848" data-end-index="20852"><td align="center" bgcolor="#0D8AA6" class="inner-td" style="-webkit-border-radius:0px; -moz-border-radius:0px; border-radius:0px; font-size:16px; text-align:center; background-color:inherit;" data-start-index="20852" data-end-index="21039"><a style="background-color:#0D8AA6; height:px; width:442px; font-size:16px; line-height:normal; font-family:Helvetica, Arial, sans-serif; color:#F2E291; padding:10px 18px 10px 18px; text-decoration:none; -webkit-border-radius:0px; -moz-border-radius:0px; border-radius:0px; border:1px solid #0D8AA6; display:inline-block; border-width:1px; border-style:solid; border-color:#0D8AA6; letter-spacing:0px; font-weight:normal;" href="https://sleepy-retreat-90049.herokuapp.com/" target="_blank" data-start-index="21039" data-end-index="21368">View in Calendar</a></td></tr></tbody></table></td></tr></tbody></table></td>
@@ -349,5 +348,15 @@ router.post('/', function (req, res){
         });
     })
 })
+
+function convertISO(date){
+  //var str = '2011-04-11T10:20:30Z';
+  var parts = date.slice(0, -1).split('T');
+  var dateComponent = parts[0];
+  var timeComponent = parts[1];
+  console.log('date', dateComponent);
+  console.log('time', timeComponent);
+  return dateComponent + ' ' + timeComponent
+}
 
 module.exports = router
