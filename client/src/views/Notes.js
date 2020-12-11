@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import EditNote from "./EditNote";
 import API from '../utils/API'
-//import noteReducer from ".. /reducers/noteReducer";
+
 class Note extends Component {
 
   constructor(props){
@@ -31,7 +31,6 @@ class Note extends Component {
   
   deleteNote = async (noteId) => {
     let result = await API.deleteNote(noteId)
-    //noteId.remove()
   }
   
   componentDidMount(){

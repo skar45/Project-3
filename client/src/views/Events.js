@@ -12,7 +12,6 @@ import {UserContext} from '../UserContext'
 function Events(props) {
   const [greeting, setGreeting] = useState("")
   const { authState, oktaAuth } = useOktaAuth();
-  //const [userInfo, setUserInfo] = useState(null);
   const {userInfo, setUserInfo} = useContext(UserContext)
 
   useEffect(() => {
@@ -27,10 +26,9 @@ function Events(props) {
       });
     }
     timeOfDay()
-  }, [authState, oktaAuth]); //FIXME: maybe remove setUserInfo
+  }, [authState, oktaAuth]); 
 
   async function sendLoginInfo(data){
-    //console.log('Events page: ', data)
     let result = await API.addUser(data)
   }
 

@@ -350,7 +350,6 @@ router.post('/', function (req, res){
 })
 
 function convertISO(date){
-  //var str = '2011-04-11T10:20:30Z';
   var parts = date.slice(0, -1).split('T');
   var dateComponent = parts[0];
   var timeComponent = parts[1];

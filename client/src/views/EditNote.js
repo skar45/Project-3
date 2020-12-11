@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { useHistory } from "react-router-dom";
+
 class EditNote extends Component {
-  // let history = useHistory();
+
   constructor(props) {
     super(props);
     this.state = {

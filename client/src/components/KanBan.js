@@ -15,11 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { green } from '@material-ui/core/colors';
 import Box from '@material-ui/core/Box';
-
 import Dialog from './Dialog'
-
-
-
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,8 +47,6 @@ function a11yProps(index) {
   };
 }
 
-
-
 const useStyles = makeStyles((theme,matches) => ({
   root: {
     backgroundColor: 'white',
@@ -73,8 +67,6 @@ const useStyles = makeStyles((theme,matches) => ({
     },
   },
 }));
-
-
 
 export default function FloatingActionButtonZoom() {
   const [todoInput,setInput] = React.useState([])

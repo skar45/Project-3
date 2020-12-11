@@ -18,18 +18,14 @@ export default function AllEvents(props){
         let currentUserData = eventsData.data.filter(user => user.email === loggedUser)
         console.log('currentUserData =', currentUserData)
         if (currentUserData[0]){
-            //console.log('currentUserData=', currentUserData[0])
-            //console.log('Prepare to set events', currentUserData[0].events)
             setUser(currentUserData[0])
             setEvents(currentUserData[0].events)
         } else{
             console.log('No currentUserData')
         }
-        
     }
 
     function convertISO(date){
-        //var str = '2011-04-11T10:20:30Z';
         var parts = date.slice(0, -1).split('T');
         var dateComponent = parts[0];
         var timeComponent = parts[1];

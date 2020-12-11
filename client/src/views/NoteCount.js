@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 class NoteCounter extends Component {
   render() {
     return (

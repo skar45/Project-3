@@ -121,11 +121,7 @@ export default function CalendarMain() {
       let currentUserData = result.data.filter(user => user.email === loggedUser)
       console.log('[currentUserData]:', result.data)
       currentUserData[0]?setEventList(currentUserData[0].events):setEventList([])
-    
-      
     }
-    
-
   }
 
   async function updateEvent(data){
@@ -216,9 +212,9 @@ export default function CalendarMain() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-          events={eventList} //TODO: or use 'events' setting to fetch from a feed
+          events={eventList} 
           select={handleOpen}
-          eventContent={renderEventContent} // custom render function
+          eventContent={renderEventContent} 
           eventClick={handleClickOpen}
           eventsSet={handleEvents}
           eventAdd={(response) => addEvents(response)}

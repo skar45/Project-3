@@ -2,6 +2,7 @@
 import axios from 'axios'
 
 export default {
+
     // event requests
     addEvent: function(eventData, userData){
         return axios.post("/api/events", {events: eventData, user: userData})
@@ -11,16 +12,8 @@ export default {
     },
     deleteEvent: async function(id, userData){
         return axios.delete(`/api/events/${id}`, { data: userData })
-        // const response = await fetch('/api/events/' + id, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-type': 'application/json'
-        //     }
-        // })
-
-        // return response
-
     },
+
     // note requests
     saveNote: function(noteData, userData){
         return axios.post("/api/notes", {notes: noteData, user: userData} )
@@ -32,7 +25,6 @@ export default {
         return axios.get("/api/users")
     },
     addUser: function(userData){
-        //console.log('API user data received: ', userData)
         return axios.post("/api/users", userData)
     },
     sendReminder: function(user, eventData){

@@ -18,16 +18,12 @@ class NewNote extends Component {
 
   saveNote = async (note) => {
     const loggedUser = localStorage.getItem('user')
-    const {userInfo} = this.context;
     let result = await API.saveNote(note, loggedUser)
-    //console.log('Adding note', note, userInfo)
   }
   
 
   handleSubmit = (e) => {
     e.preventDefault();
-    //const title = this.getTitle.value;
-    //const message = this.getMessage.value;
     const data = {
       id: uuidv4(),
       title: this.getTitle.value,
@@ -46,7 +42,6 @@ class NewNote extends Component {
     this.getMessage.value = "";
   };
   render() {
-    const {userInfo, setUserInfo} = this.context;
     return (
       <div className="note-container" style={{position: "relative"}}>
         <h1 className="note_heading">Create Note</h1>

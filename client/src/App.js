@@ -1,8 +1,5 @@
-
-
 import Events from './views/Events';
-
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CalendarMain from "./views/CalendarMain";
@@ -13,7 +10,6 @@ import NoteCounter from "./views/NoteCount";
 import EditNote from "./views/EditNote";
 import Footer from "./components/Footer";
 import Kanban from './components/KanBan'
-
 import {useHistory} from 'react-router-dom';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
@@ -25,7 +21,6 @@ const oktaAuth = new OktaAuth(config.oidc);
 
 function App() {
   const [userInfo, setUserInfo] = useState(null)
-  //const providerValue = useMemo(() => ({userInfo, setUserInfo}), [userInfo, setUserInfo])
   const history = useHistory(); // example from react-router
 
   const customAuthHandler = () => {
